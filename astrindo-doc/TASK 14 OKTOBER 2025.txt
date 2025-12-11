@@ -1,0 +1,46 @@
+TASK 14 OKTOBER 2025
+1. Purchase order Test
+## purchase order astrindo
+
+https://astrindo-staging-24475740.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_9952480e-29bd-47bb-b256-2104f69b83f7/2?debug=1
+
+
+2. Sale Order Test = belum naik main
+## Sales Order (SO) / Job Order
+
+https://astrindo-staging-24475740.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_9e7e09d6-4995-468f-bc5c-43fd7469c143/16
+
+
+3. Quotation Test = belum naik main
+## Quotation
+
+https://astrindo-staging-24475740.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_56fc57b4-78f1-4842-a36a-5801e6de10b2/16
+
+
+6. Invoice Test
+## Invoice PSIP dengan QR Code
+
+https://astrindo-staging-24475740.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_326d672b-3c91-43ee-96fd-5cf7a9c28fda/29
+
+quantity: sesuai quantity
+Record So : 6
+Record invoice :24
+
+test downlpayment
+https://astrindo-staging-24397234.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_7c567662-7f98-4094-9d46-4553d0fb1bfe/24?debug=1
+
+
+9.svo
+https://astrindo-staging-24475740.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_b8064ca7-0b25-4c25-9161-6f9ebaabcfb4/3
+
+
+10. svr
+
+https://astrindo-staging-24475740.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_079d05c2-6690-4b0b-bbbf-4f61268836e0/3
+
+
+11. DO dot matrix
+https://astrindo-staging-24475740.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_5b4af5f3-897b-43ce-91e0-d33cf88b500d/4
+
+12. DO dot matrix no SN
+https://astrindo-staging-24475740.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_05e7a8ed-8187-4c7b-90f3-cb8d9cbd6b25/4

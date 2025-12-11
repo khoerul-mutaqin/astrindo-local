@@ -1,0 +1,76 @@
+TASK 19 September 2025
+ 
+1. Appropal report: [FAL] purchase request === SUDAH
+
+REVISI
+
+- Quantity bulat	: contoh : 2
+- Format tanggal	: 18 Sept 2025 16:20:11
+- Status 		: Aprrove atau tidak
+- Tabel Qty sama Nomor Center, Selain Itu kiri
+- Deskripsi kebawah
+
+https://www.falinwa.com/odoo/project.task/38020
+
+https://falinwasales-astrindo-staging-23710675.dev.odoo.com/report/pdf/approvals.report_approval_request_copy_1/1
+
+TEST ISSUE descRIPTION:
+https://falinwasales-astrindo-staging-23710675.dev.odoo.com/report/pdf/approvals.report_approval_request_copy_1/14
+
+
+2. Sale Order Report:  Print Out Sales Order (SO) / Job Order  === SUDAH
+
+REVISI
+- Header di samain PO	:
+- Quantity bulat	: contoh : 2
+- Kasih jarak samping 	: seperti purchase
+- Tabel Qty sama Nomor Center, Selain Itu kiri
+- tanggal sesua ods ada jam : 18 Sept 2025 16:20:11 :
+
+
+https://www.falinwa.com/odoo/project.task/38264
+
+TEST
+https://falinwasales-astrindo-staging-23710675.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_43d20711-fb83-4e03-9115-529f80cde82e/7
+
+
+
+3. INVOICE REPORT : Print Out Invoice PSIP dengan QR Code === SUDAH
+https://www.falinwa.com/odoo/project.task/38265
+
+- Qty Rounded
+- Tabel Product sama Description Itu kiri
+- tanggal sesua ods ada jam : 18 Sept 2025 16:20:11 :
+
+
+TEST:
+https://falinwasales-astrindo-staging-23710675.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_90f77efa-d105-457f-ba8f-c3666361310d/14
+
+
+4. REPAIR Report : Print out Service Order (SVO) – Tanda Terima Service === SUDAH OKE GAK ADA REVISI
+[BP] Print Out SVO - Tanda terima service
+https://www.falinwa.com/odoo/project.task/38259
+
+TEST
+https://falinwasales-astrindo-staging-23710675.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_216231c4-fca6-4cf9-9ea9-35ecd0a5e890/1
+
+
+
+5.  Stock Picking Report: Print out DO dot matrix === SUDAH
+
+[BP] Print out DO dot matrix (DO dan internal transfer)
+https://www.falinwa.com/odoo/project.task/38034
+- Qty Rounded
+- - tanggal sesua ods ada jam : 18 Sept 2025 16:20:11 :
+
+TEST:
+https://falinwasales-astrindo-staging-23710675.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_0da8e5bc-1957-42f0-8870-e70353c027b3/20
+
+
+6. https://www.falinwa.com/odoo/project.task/38260			== SUDAH OKE GAK ADA REVISI
+Print out Kwitansi Non Materai
+
+
+TEST:
+
+https://falinwasales-astrindo-staging-23710675.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_cfebbd21-772b-4de5-8ba9-70f46155368d/2

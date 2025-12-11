@@ -1,0 +1,225 @@
+<t t-name="approvals.report_aprroval_request_document_copy_1">
+    <t t-call="web.external_layout">
+        <h4 style="text-align:center;margin:10px 0;">PURCHASE REQUISITION</h4>
+        <style>
+            .table {
+            }
+        </style>
+        <div class="o_report_requisition">
+            <div class="border border-1 rounded-3 p-2 mb-2" style="background-color:#EBEBEB">
+                <div class="row" style="font-size:12px">
+                    <div class="col-2">
+                        <strong>Diminta Oleh</strong>
+                        <br/>
+                        <strong>Jabatan</strong>
+                        <br/>
+                        <strong>Department</strong>
+                    </div>
+                    <div class="col-4">
+                    : 
+                        
+                        <span t-field="o.request_owner_id"/>
+                        <br/>
+                    : 
+                        
+                        <span t-field="o.x_studio_jabatan"/>
+
+                        <br/>
+                    : 
+
+                        <t t-set="kode" t-value="(o.x_studio_departemen.name or '')"/>
+                        <span t-esc="(kode or '').split('/')[-1].strip()"/>
+                        <!--<span  t-esc="(kode or '')" />-->
+
+
+                        <!--<span t-field="o.x_studio_departemen"/>-->
+                    </div>
+                    <div class="col-2">
+                        <strong>No PR</strong>
+                        <br/>
+                        <strong>Tanggal</strong>
+                        <br/>
+                        <strong>Date Confirm</strong>
+                    </div>
+                    <div class="col-4">
+                    : 
+                        
+                        <span t-field="o.name"/>
+                        <br/>
+                    : 
+                        
+                        <span t-field="o.date" t-options="{&quot;format&quot;: &quot;dd MMM yyyy HH:mm:ss&quot;}"/>
+                        <br/>
+                    : 
+                        
+                        <span t-field="o.date_confirmed" t-options="{&quot;format&quot;: &quot;dd MMM yyyy HH:mm:ss&quot;}"/>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Purchase Details Table -->
+            <table class="table" width="100%" style="font-size:12px;margin-top:20px">
+                <tr class="text-center" style="background-color:#a6aaaf">
+                    <td colspan="11">
+                        <strong>Purchase Details</strong>
+                    </td>
+                </tr>
+                <tr class="text-center" style="background-color:#a6aaaf">
+                    <td>
+                        <strong>No</strong>
+                    </td>
+                    <td width="10%">
+                        <strong>Item Code</strong>
+                    </td>
+                    <td width="15%">
+                        <strong>Description</strong>
+                    </td>
+                    <td width="5%">
+                        <strong>Qty (A)</strong>
+                    </td>
+                    <td width="7%">
+                        <strong>Harga</strong>
+                    </td>
+                    <td width="10%">
+                        <strong>Stock On Hand (B)</strong>
+                    </td>
+                    <td width="10%">
+                        <strong>Goods On The Way (C)</strong>
+                    </td>
+                    <td width="13%">
+                        <strong>Run Rate Weekly (D)</strong>
+                    </td>
+                    <td width="10%">
+                        <strong>(A+B+C)/D Stock For Weeks</strong>
+                    </td>
+                    <td width="12%">
+                        <strong>Keterangan</strong>
+                    </td>
+                    <td width="10%">
+                        <strong>Rekomendasi Vendor</strong>
+                    </td>
+                </tr>
+                <t t-set="line_number" t-value="0"/>                          
+                <t t-foreach="o.product_line_ids" t-as="line">
+                    <tr>
+                        <!-- Tampilkan nomor urut -->
+                        <t t-set="line_number" t-value="line_number + 1"/>
+                        <td name="line_number" class="text-center">
+                            <t t-esc="line_number"/> 
+                        </td>
+                        <td>
+                            <span t-field="line.product_id.default_code"/>
+                        </td>
+                        <td>
+                            <span t-field="line.description"/>
+                        </td>
+                        <td class="text-center">
+                            <!--<span t-field="line.quantity"/>-->
+                            <span t-esc="int(line.quantity)"/>                            
+                        </td>
+                        <td style="text-align:center;">
+                            <span t-field="line.x_studio_price"/>
+                        </td>
+                        <td style="text-align:center;">
+                            <!--<span t-field="line.x_studio_stock_on_hand"/>-->
+                            <span t-esc="int(line.x_studio_stock_on_hand)"/>                            
+                        </td>
+                        <td style="text-align:center;">
+                            <!--<span t-field="line.x_studio_goods_on_the_way"/>-->
+                            <span t-esc="int(line.x_studio_goods_on_the_way)"/>                            
+                        </td>
+                        <td style="text-align:center;">
+                            <!--<span t-field="line.x_studio_run_rate_weekly"/>-->
+                            <span t-esc="int(line.x_studio_run_rate_weekly)"/>                            
+                        </td>
+                        <td style="text-align:center;">
+                            <!--<span t-field="line.x_studio_stocks_for_weeks"/>-->
+                            <span t-esc="int(line.x_studio_stocks_for_weeks)"/>                            
+                        </td>
+                        <td width="10%" style="max-width: 100px;">
+                            <span t-field="line.x_studio_note"/>
+                        </td>
+                        <td>
+                            <span t-field="line.seller_id"/>
+                        </td>
+                    </tr>
+                </t>
+            </table>
+            
+            <table class="table" width="100%" style="font-size:12px;margin-top:20px">
+                <tr style="background-color:#a6aaaf">
+                    <td>
+                        <strong>Tujuan</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span t-field="o.category_id"/>
+                    </td>
+                </tr>
+            </table>
+            <table class="table" width="100%" style="font-size:12px;margin-top:20px">
+                <tr style="background-color:#a6aaaf">
+                    <td>
+                        <strong>Note</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span t-field="o.reason"/>
+                    </td>
+                </tr>
+            </table>
+            <table class="table" width="100%" style="font-size:12px;margin-top:20px">
+                <tr style="background-color:#a6aaaf">
+                    <td>
+                        <strong>PA</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span t-field="o.reference"/>
+                    </td>
+                </tr>
+            </table>
+            <table class="table" width="100%" style="font-size:12px;margin-top:20px">
+                <tr style="background-color:#a6aaaf">
+                    <td colspan="4">
+                        <strong>List Autorisasi</strong>
+                    </td>
+                </tr>
+                <t t-foreach="o.approver_ids" t-as="appr">
+                    <tr>
+                        <td width="25%">
+                            <span t-field="appr.user_id"/>
+                        </td>
+                        <td width="25%">
+                            <span t-field="appr.write_date" t-options="{&quot;format&quot;: &quot;dd MMM yyyy HH:mm:ss&quot;}"/>
+
+                        </td>
+                        <td width="25%">
+                            <span t-field="appr.user_id.employee_id.job_id"/>
+                        </td>
+                        <td width="25%">
+                            <t t-if="appr.status == 'approved'">
+                                <span t-field="appr.status"/>
+                            </t>
+                            <t t-else="">
+                                Not Approved
+                            </t>
+                        </td>
+                    </tr>
+                </t>
+            </table>
+
+            <div style="font-size:12px" colspan="100%">
+                Note: Dokumen digital ini tidak memerlukan tanda tangan
+            </div>
+
+                 
+            <div>
+
+            </div>
+        </div>
+    </t>
+</t>

@@ -1,0 +1,6 @@
+DAFTAR MIGRATION 19
+
+cds_activity_product_category
+fal_delivery_term 
+fal_image_export_to_excel
+fal_delivery_report

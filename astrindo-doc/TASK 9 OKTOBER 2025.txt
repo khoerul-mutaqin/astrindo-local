@@ -1,0 +1,32 @@
+TASK 9 oktober 2025
+
+ready_to_ship
+shipped
+Delivered
+
+state 
+information
+sale order
+
+
+percustomer di hide
+
+Product
+
+1. sellersku = default code
+2. penambahan workflow = ready_to_ship , Shiped, delivered
+3. Penambahan field baru =  state , information, sale order
+4. kolom percustomer di hide
+5. unit price - sellerdoiscounttolal : paidprice = quantity
+6. persentarse = sellerdoiscounttolal/unit price	
+
+
+
+AGUNG
+1. Filter is customer				= OKE
+2. field ada yang belum readonly		= OKE
+3. customer_type kosong				= OKE
+4. Responsible di isi sesuai user yang login 
+(mawardi, wwisnu ccall center,customercare)
+5. penambahan kolom responsible
+6. is service (team verification) jadi bisa lihat button repair and reject

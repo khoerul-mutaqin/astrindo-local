@@ -1,0 +1,14 @@
+10 OKTBER 2025
+
+PARENCTIC TASK
+1. invoice draft
+2. copy notification_message line 64 => read_import_workflow line 474
+3. ganti chanel nama function procces
+4. sale draft dan pass
+5. invoice draft procces
+
+
+TASK 13 OKTOBER 2025
+
+1. Order delivered = bisa
+2. Order qty = tidak bisa

@@ -1,0 +1,175 @@
+<t t-name="studio_report_document">
+    <div class="page">
+        Page : 1
+
+        <!--Section Header-->
+        <table class="table" width="100%">
+            <tr>
+                <td colspan="2" width="35%">
+                </td>
+                <td colspan="2" style="text-align:center; border-bottom: 2px solid black;" width="30%">
+                    <strong>JOB ORDER</strong>
+                </td>
+                <td colspan="2" width="35%">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                </td>
+                <td colspan="2" style="text-align:center;" width="30%">
+                    <!--<strong>No. OPN-25-07-16-015</strong>-->
+                    <strong>
+                        <span t-field="doc.name"/>                    
+                    </strong>
+                </td>
+                <td colspan="2">
+                </td>
+            </tr>
+        </table>
+
+    
+        <!--Section Delivery To-->
+        <table class="table" width="100%">
+            <tr class="text-center">
+                <td colspan="6">
+                    <span>Delivery To :</span>
+                </td>
+            </tr>
+            <tr class="text-center">
+                <td colspan="3">
+                    <span t-field="doc.partner_shipping_id"/>  
+                </td>
+                <td colspan="1">
+                    <span>SO Date </span>
+                </td>
+                <td colspan="2">
+                     : <span t-field="doc.date_order" t-options="{&quot;format&quot;: &quot;dd MMM yyyy&quot;}"/>  
+                </td>
+            </tr>
+            <tr class="text-center">
+                <td colspan="3">
+                    <span t-field="doc.partner_shipping_id.street"/> 
+                </td>
+                <td colspan="1">
+                    <span>TO Payment</span>
+                </td>
+                <td colspan="2">
+                     : <span t-field="doc.payment_term_id"/>  
+                </td>
+            </tr>
+            <tr class="text-center">
+                <td colspan="6">
+                    <span t-field="doc.partner_shipping_id.street2"/> 
+                </td>
+            </tr>
+            <tr class="text-center">
+                <td colspan="6">
+                    <span t-field="doc.partner_shipping_id.country_id"/> 
+                </td>
+            </tr>
+        </table>
+        <br/>
+
+        <!--Section Product-->
+        <table class="table" width="100%" border="1" style="text-align:center; border-collapse: collapse;">
+            <tr class="text-center">
+                <td style="padding:5px;">
+                    <span>No.</span>
+                </td>
+                <td style="padding:5px;">
+                    <span>Product Number</span>
+                </td>
+                <td style="padding:5px;">
+                    <span>Description</span>
+                </td>
+                <td style="padding:5px;">
+                    <span>Quantity</span>
+                </td>
+                <td style="padding:5px;">
+                    <span>Price</span>
+                </td>
+                <td style="padding:5px;">
+                    <span>SALES</span>
+                </td>
+            </tr>
+	    
+           <t t-set="line_number" t-value="0"/>  
+       	   <t t-foreach="doc.order_line" t-as="line">
+            <tr class="text-center">
+                <!-- Tampilkan nomor urut -->
+                <t t-set="line_number" t-value="line_number + 1"/>
+                <td style="padding:5px;">
+                   <t t-esc="line_number"/> 
+                </td>
+                <td style="padding:5px;">
+                    <span t-field="line.product_id"/>
+                </td>
+                <td style="padding:5px;">
+                    <span t-field="line.name"/>
+                </td>
+                <td style="padding:5px;">
+                    <span t-field="line.product_uom_qty"/>
+                </td>
+                <td style="padding:5px;">
+                    <span t-field="line.price_unit"/>
+                </td>
+                <td style="padding:5px;">
+                    <span t-field="line.product_id.default_code"/>
+                </td>
+            </tr>
+	    </t>
+
+        </table>   
+        <br/>
+
+
+        <!--Section Remaks-->
+        <table class="table" width="100%">
+            <tr>
+                <td colspan="6">
+                    <span>*Remaks</span>
+		            <br/><span t-field="doc.note"/> 
+                </td>
+            </tr>    
+        </table>        
+        <br/>
+        
+        <!--Section Prepared By-->
+        <table class="table" width="100%">
+            <tr>
+                <td width="20%">
+                    <span/>
+                </td>
+                <td width="20%">
+                    <span/>
+                </td>
+                <td width="20%">
+                    <span/>
+                </td>
+                <td colspan="3">
+                </td>
+            </tr>    
+            <tr>
+                <td colspan="1" style="padding-bottom: 100px;">
+                    <span>Prepared by :</span>
+                </td>
+                <td colspan="5" style="padding-bottom: 100px;">
+                    <span>Checked by :</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1">
+                    <span>Sales Admin</span>
+                </td>
+                <td colspan="2">
+                    <span>Product Manager</span>
+                </td>
+                <td colspan="3">
+                     <!-- <span>Print Date: Agustus 14, 2025, 12:37:45</span> -->
+                     <span>Print Date: <span t-esc="datetime.datetime.now().strftime('%B %d, %Y %H:%M:%S')"/></span>
+                </td>
+            </tr>            
+        </table>        
+        <br/>
+    </div>
+</t>

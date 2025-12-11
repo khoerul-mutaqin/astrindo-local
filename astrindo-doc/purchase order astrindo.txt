@@ -1,0 +1,305 @@
+<t t-name="purchase.report_purchaseorder_document_copy_1">
+    <t t-call="web.external_layout">
+        <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+        <style>
+    .po-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.po-title .main-title {
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.halus {
+    font-size: 12px;
+    font-weight: bold;
+}
+.po-title .po-number {
+    margin-top: 5px;
+    font-size: 16px;
+    border-top: 2px solid #000;
+    display: inline-block;
+    padding-top: 5px;
+}
+
+</style>
+        <div class="po-title">
+            <div class="main-title">Purchase Order</div>
+            <div class="po-number">
+                <span t-field="o.name"/>
+            </div>
+        </div>
+
+        <div class="page">
+            <div class="oe_structure"/>
+
+            <div class="row mb-4">
+                <div class="col">
+                    <strong>
+                        <b>To :</b>
+                    </strong>
+                    <div t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;, &quot;vat&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>  <b> Fiscal Position: </b>   <span t-field="o.fiscal_position_id"/>  </div>
+                <div class="col">
+                    <strong>
+                        <b>Order Date : </b>
+                    </strong>
+<span t-if="o.date_approve" t-field="o.date_approve" t-options="{'format': 'dd MMM yyyy HH:mm:ss'}"/>
+                    <br/>
+                    <br/>
+                    <strong>
+                        <b>Ship To :</b>
+                    </strong>
+                    <t t-if="o.dest_address_id">
+                        <div t-field="o.dest_address_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}" name="purchase_shipping_address"/>
+                    </t>
+                    <t t-else="">
+                        <t t-if="o.picking_type_id and o.picking_type_id.warehouse_id">
+                            <div t-field="o.picking_type_id.warehouse_id.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
+                        </t>
+                    </t>
+                </div>
+                <!--<div t-if="o.partner_ref" class="col">-->
+                <!--    <strong>Your Order Reference</strong>-->
+                <!--    <div t-field="o.partner_ref"/></div>-->
+                <!--<div t-if="o.state in ['purchase','done'] and o.date_approve" class="col-3 bm-2">-->
+                <!--    <strong>Order Date:</strong>-->
+                <!--    <p t-field="o.date_approve" t-options="{'date_only': 'true'}" class="m-0"/>-->
+                <!--</div>-->
+                <!--<div t-elif="o.date_order" class="col-2 bm-2">-->
+                <!--    <strong>Order Deadline:</strong>-->
+                <!--    <p t-field="o.date_order" t-options="{'date_only': 'true'}" class="m-0"/>-->
+                <!--</div>-->
+                <!--<div t-if="o.date_planned" class="col-2 bm-2">-->
+                <!--    <strong>Expected Arrival:</strong>-->
+                <!--    <p t-field="o.date_planned" t-options="{'date_only': 'true'}" class="m-0"/>-->
+                <!--</div>-->
+                <!--<div t-if="o.incoterm_id" class="col-2 bm-2">-->
+                <!--    <strong>Incoterm:</strong>-->
+                <!--    <p t-if="o.incoterm_location">-->
+                <!--        <span t-field="o.incoterm_id.code"/>-->
+                <!--        <br/>-->
+                <!--        <span t-field="o.incoterm_location"/>-->
+                <!--    </p>-->
+                <!--    <p t-else="" t-field="o.incoterm_id.code" class="m-0"/>-->
+                <!--</div>-->
+            </div>
+            <t t-set="discount_total" t-value="sum([(l.price_unit * l.product_qty * (l.discount or 0.0) / 100.0) for l in o.order_line])"/>
+            <t t-set="amount_total" t-value="sum([(l.price_unit * l.product_qty ) for l in o.order_line])"/>
+
+            <table class="o_has_total_table table o_main_table table-borderless">
+                <thead style="display: table-row-group">
+                    <tr>
+                        <th class="text-start">
+                            <strong>No</strong>
+                        </th>
+                        <th name="th_item_code" class="text-start">
+                            <strong>Item Code</strong>
+                        </th>
+                        <th name="th_description" class="text-start">
+                            <strong>Description</strong>
+                        </th>
+                        <th name="th_quantity" class="text-end">
+                            <strong>Qty</strong>
+                        </th>
+                        <th name="th_price_unit" class="text-end">
+                            <strong>Unit Price</strong>
+                        </th>
+                        <!--<th name="th_discount" class="text-end">-->
+                        <!--    <strong>Disc.</strong>-->
+                        <!--</th>-->
+                        <!--<th name="th_taxes" class="text-end">-->
+                        <!--    <strong>Taxes</strong>-->
+                        <!--</th>-->
+                        <th name="th_subtotal" class="text-end">
+                            <strong>Total</strong>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-set="current_subtotal" t-value="0"/>
+                    <t t-foreach="o.order_line" t-as="line">
+                        <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal"/>
+                        <tr t-att-class="'fw-bold o_line_section' if line.display_type == 'line_section' else 'fst-italic o_line_note' if line.display_type == 'line_note' else ''">
+                            <t t-if="not line.display_type">
+                                <td class="text-start">
+                        <span t-esc="line_index + 1"/>
+                    </td>
+                                <td>
+                                    <span t-field="line.product_id.default_code"/>
+                                </td>
+                                <td id="product" class="text-start">
+                                    <span t-field="line.product_id.name"/>
+                                </td>
+                                <td class="text-end">
+    <span t-esc="'{:,}'.format(int(line.product_qty)).replace(',', '.')"/>
+                                    <span t-field="line.product_uom.name" groups="uom.group_uom"/>
+                                    <span t-if="line.product_packaging_id">
+                                        (
+                                        
+                                        
+                                        <span t-field="line.product_packaging_qty" t-options="{&quot;widget&quot;: &quot;integer&quot;}"/>
+                                        <span t-field="line.product_packaging_id"/>)
+                                    </span>
+                                </td>
+                                <td class="text-end">
+                                    <span t-field="line.price_unit"/>
+                                </td>
+                                <!--<td class="text-end">-->
+                                <!--    <span class="text-align-bottom">-->
+                                <!--        <span t-field="line.discount"/>%</span>-->
+                                <!--</td>-->
+                                <!--<td class="text-end">-->
+                                <!--    <span t-out="', '.join([(tax.invoice_label or tax.name) for tax in line.taxes_id])"/>-->
+                                <!--</td>-->
+                                <td class="text-end">
+                                    <span t-esc="line.price_unit * line.product_qty" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                                </td>
+                            </t>
+                            <t t-if="line.display_type == 'line_section'">
+                                <td colspan="99" id="section">
+                                    <span t-field="line.name"/>
+                                </td>
+                                <t t-set="current_section" t-value="line"/>
+                                <t t-set="current_subtotal" t-value="0"/></t>
+                            <t t-if="line.display_type == 'line_note'">
+                                <td colspan="99" id="note">
+                                    <span t-field="line.name"/>
+                                </td>
+                            </t>
+                        </tr>
+                        <t t-if="current_section and (line_last or o.order_line[line_index+1].display_type == 'line_section')">
+                            <tr class="is-subtotal text-end">
+                                <td colspan="99" id="subtotal">
+                                    <strong class="mr16">Subtotal</strong>
+                                    <span t-out="current_subtotal" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </t>
+                </tbody>
+            </table>
+            <!--<div id="total" class="row justify-content-end mt-n3">-->
+            <!--    <div class="col-4">-->
+            <!--        <table class="o_total_table table table-borderless">-->
+            <!--            <t t-call="purchase.document_tax_totals_copy_1">-->
+            <!--                <t t-set="tax_totals" t-value="o.tax_totals"/>-->
+            <!--                <t t-set="currency" t-value="o.currency_id"/></t>-->
+            <!--        </table>-->
+            <!--    </div>-->
+            <!--</div>-->
+            <div id="total" class="row mt-n3">
+                <!-- Bagian Kiri: Payment Term & Remarks -->
+                <div class="col-8">
+                    <br/>
+                    <div>
+                        <strong>Payment Term:</strong>
+                        <span t-field="o.payment_term_id"/>
+                    </div>
+                    <div class="mt-2">
+                        <strong>Remarks:</strong>
+                        <span t-field="o.notes"/>
+                    </div>
+                </div>
+            
+                <!-- Bagian Kanan: Tax & Totals -->
+                <div class="col-4">
+                        <t t-set="tax_totals" t-value="o.tax_totals"/>
+                        <t t-set="currency" t-value="o.currency_id"/>
+                        <t t-set="is_materai" t-value="0"/>   
+                        <t t-set="materai" t-value="env['product.product'].search([('name', '=', 'Materai' )], limit=1)"/>                 
+                        <t t-if="o.order_line.filtered(lambda l: l.product_id.name == 'Materai')">
+                            <t t-set="is_materai" t-value="true"/>                 
+                        </t>
+                        <t t-set="is_discount" t-value="0"/>                 
+                        <t t-if="o.order_line.filtered(lambda l: l.product_id.name == 'Discount')">
+                        <t t-set="is_discount" t-value="true"/>
+                            <t t-set="discount_value" t-value="O._get_order_lines_to_report().filtered(lambda l: l.product_id.name in ['Discount'])"/>                                                
+                        </t>
+                                            
+                       <table class="o_table_totals" style="width:76%; float:right; border-collapse: collapse; margin-top:0px;border-radius:0px;">
+                            <tr style="border-top:0px solid #000;">
+                                <td class="text-start" style="padding:4px;">Subtotal</td>
+                                <td class="text-end" style="padding:4px;width:40.9%;">
+                                    <span t-out="amount_total" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: currency}"/>
+                                </td>
+                            </tr>
+                            <tr t-if="is_discount">    
+                                <td class="text-start" style="padding:4px;">Discount</td>
+                                <td class="text-end" style="padding:4px;">
+                                    <span t-out="discount_total" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: currency}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-start" style="padding:4px;">PPN</td>
+                                <td class="text-end" style="padding:4px;">
+                                    <span t-field="o.amount_tax" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: currency}"/>
+                                </td>
+                            </tr>
+                            <tr style="border-top:2px solid #000;">
+                                <td class="text-start" style="padding:6px; font-weight:bold;">Grand Total</td>
+                                <td class="text-end" style="padding:6px; font-weight:bold;">
+                                    <span t-out="tax_totals['total_amount_currency']" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: currency}"/>
+                                </td>
+                            </tr>
+                        </table>
+                </div>
+            </div>
+            
+            <table id="qr" class="table-borderless o_ignore_layout_styling " width="100%">
+                <tr t-if="o.qr_img">
+                    <td>
+                        <img t-att-src="'data:image/png;base64,%s' % o.qr_img.decode('utf-8')" style="max-height:120px;"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        This is Computer Generated Purchase Order, no signature required.
+                        <br/>
+                        Please scan the QR Code above to validate
+                    </td>
+                </tr>
+            </table>
+            
+
+
+            <!--<p t-field="o.notes" class="mt-4"/>-->
+            <!--<div class="oe_structure"/>-->
+            <!--<strong>Payment Terms: </strong>-->
+            <!--<span t-field="o.payment_term_id" class="mt-4"/>-->
+            <!--<t t-set="base_address" t-value="o.env['ir.config_parameter'].sudo().get_param('web.base.url')"/>-->
+            <!--<t t-set="portal_url" t-value="base_address + '/my/purchase/' + str(o.id) + '#portal_connect_software_modal'"/>-->
+            <!--<div t-if="any(u._is_portal() for u in o.partner_id.user_ids)" class="text-center">-->
+            <!--    <a t-att-href="portal_url">Connect your software</a> with -->
+                
+                
+                
+                
+            
+                
+                
+                
+                
+                
+            <!--    <t t-out="o.company_id.name"/> to create quotes automatically.-->
+            
+            
+            
+            
+            
+        
+            
+            
+            
+            
+            
+            <!--</div>-->
+        </div>
+    </t>
+    <!--undefined-->
+
+
+
+
+
+</t>

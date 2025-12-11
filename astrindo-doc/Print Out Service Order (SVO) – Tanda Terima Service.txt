@@ -1,0 +1,293 @@
+<t t-name="studio_report_document">
+    <div class="page">
+        <br/>
+        <!--Section Header-->
+        <table class="table-borderless" width="100%">
+
+            <tr class="text-left">
+                <td colspan="6">
+                    <span>
+                        <STRONG>
+                            <!--<span t-esc="doc.company_id.name.upper()"/>-->
+                             ASTRINDO STARVISION
+                        </STRONG>
+                    </span>
+                </td>
+            </tr>
+            <tr class="text-left">
+                <td colspan="6">
+                    <STRONG>
+                        <span style="font-size:10px">
+                            Service Center
+                        </span>
+                    </STRONG>
+                </td>
+            </tr>
+            <tr class="text-left">
+                <td colspan="6" style="font-size:10px">
+                    <strong>
+                         <span t-esc="doc.company_id.street"/>                    
+                    </strong>
+                </td>
+            </tr>
+            <tr class="text-left">
+                <td colspan="3" style="font-size:10px">
+                    <strong>
+                        <span t-esc="doc.company_id.street2"/>                    
+                    </strong>
+                </td>
+                <td colspan="3" style="text-align:right; font-size:10px">
+                    <strong>
+                        <span> Tanda Terima Service</span>
+                    </strong>
+                </td>
+            </tr>
+            <tr class="text-left">
+                <td colspan="3" style="font-size:10px">
+                    <strong>
+                        <span t-esc="doc.company_id.city"/> <span style="font-size:10px" t-esc="doc.company_id.zip"/>                    
+                    </strong>
+                </td>
+                <td colspan="3" style="text-align:right; font-size:10px">
+                    <strong>
+                        <span t-esc="doc.ticket_ref"/>      
+                    </strong>
+                </td>
+            </tr>
+            <tr class="text-left">
+                <td colspan="6" style="font-size:10px">
+                    <strong>
+                        TELP : <span t-esc="doc.company_id.phone"/> |
+                        Whatsapp : <span t-esc="doc.company_id.phone"/>
+                    </strong>
+                </td>
+            </tr>
+        </table>
+        <!--<br/>-->
+        
+        <!--Section Customer Repair-->
+<table class="table-borderless" style="margin-top: 20px; width: 100%; font-size: 10px;">
+    <tbody>
+        <tr>
+            <td colspan="4" style="text-align:center; border-bottom: 2px solid black;">
+            </td>
+        </tr>
+        
+        <tr class="text-left" style="margin-top:20px;">
+            <td width="20%">Nama</td>
+            <td width="30%">:
+            <t t-if="doc.partner_id">
+                <span t-esc="doc.partner_id.name[:15]"/>
+            </t>
+            <t t-if="doc.partner_id.street">
+                <span/>
+            </t>
+                
+            </td>
+            <td width="20%"><span>Invoice No.</span></td>
+            <td width="30%">: <span t-field="doc.x_studio_invoice_number"/></td>
+        </tr>
+        <tr class="text-left">
+            <td width="20%" style="vertical-align: top;">Alamat</td>
+            <td width="30%" style="vertical-align: top;">:
+                <t t-if="doc.partner_id.street">
+                    <span t-field="doc.partner_id.street"/><br/>
+                </t>
+            </td>
+            <td width="20%"><span>Invoice Date</span></td>
+            <td width="30%">: <span t-field="doc.x_studio_invoice_date"/></td>
+        </tr>
+        <tr class="text-left">
+            <td width="20%"/> 
+            <td width="30%">:
+                <t t-if="doc.partner_id.street2">
+                    <span t-field="doc.partner_id.street2"/><br/>
+                </t>
+            </td>
+            <td width="20%"><span>Nama Merek</span></td>
+            <td width="30%">: <span t-field="doc.x_studio_product.name"/></td>
+        </tr>
+        <tr class="text-left">
+            <td width="20%"/> 
+            <td width="30%">:
+                <t t-if="doc.partner_id.city">
+                    <span t-field="doc.partner_id.city"/> <span t-field="doc.partner_id.zip"/>
+                </t>
+            </td>
+            <td width="20%"><span>Nama Model</span></td>
+            <td width="30%">: <span t-field="doc.x_studio_nama_model"/></td>
+        </tr>
+        <tr class="text-left">
+            <td width="20%"/> 
+            <td width="30%">:
+                <t t-if="doc.partner_id.country_id">
+                    <span t-field="doc.partner_id.country_id"/><br/>
+                </t>
+            </td>
+            <td width="20%"><span>No Seri</span></td>
+            <td width="30%">: <span t-field="doc.x_studio_serial_numbe"/></td>            
+        </tr>
+        <tr class="text-left">
+            <td width="20%"/> 
+            <td width="30%">:
+                <t t-if="doc.partner_id.vat">
+                    NPWP <span t-field="doc.partner_id.vat"/>
+                </t>
+            </td>
+            <td width="20%"><span>Tgl. Pembelian</span></td>
+            <td width="30%">: <span t-field="doc.x_studio_tanggal_pembelian"/></td>
+        </tr>
+
+        <tr class="text-left">
+            <td width="20%">Telp </td>
+            <td width="30%">: <span t-field="doc.partner_id.phone"/></td>
+            <td width="20%"><span>Perkiraan selesai</span> : </td>
+            <td width="30%">: <span t-field="doc.x_studio_perkiraan_selesai"/></td>
+        </tr>
+        
+        <tr class="text-left">
+            <td width="20%">Tgl/Waktu terima</td>
+            <td width="30%">: <span t-field="doc.x_studio_tanggalwaktu_terima"/></td>
+            <td/>
+            <td/>
+        </tr>
+        
+        <tr class="text-left">
+            <td width="20%">Perlengkapan</td>
+            <td width="30%">: <span t-field="doc.x_studio_perlengkapan"/></td>
+            <td/>
+            <td/>
+        </tr>
+        
+        <tr class="text-left">
+            <td width="20%">Kerusakan</td>
+            <td width="30%">: <span t-field="doc.x_studio_kerusakan"/></td>
+            <td/>
+            <td/>
+        </tr>
+        
+        <tr class="text-left">
+            <td width="20%">Catatan</td>
+            <td width="30%">: <span t-field="doc.x_studio_reason_code"/></td>
+            <td colspan="2"/> </tr>
+
+        <tr>
+            <td colspan="4" style="text-align:center; border-bottom: 2px solid black;"/>
+        </tr>
+    </tbody>
+</table>
+        <!--Section Syarat Dan Kondisi-->
+        <table class="table-borderless" width="100%" style="font-size: 10px;">
+            <tr>
+                <td colspan="6">
+                    <strong>
+                        SYARAT &amp; KONDISI
+                    </strong>
+                </td>
+            </tr>   
+            <tr>
+                <td colspan="6">
+                    <span>
+                        1. Barang tidak dapat diambil tanpa Tanda Terima ini.
+                    </span>
+                </td>
+            </tr>   
+            <tr>
+                <td colspan="6">
+                    <span>
+                        2. Kami tidak bertanggung jawab terhadap barang yang tidak diambil dalam waktu 30 hari.
+                    </span>
+                </td>
+            </tr>   
+            <tr>
+                <td colspan="6">
+                    <span>
+                        3. Kami tidak bertanggung jawab terhadap barang yang hilang akibat kebakaran, penjarahan dan bencana alam.
+                    </span>
+                </td>
+            </tr>   
+            <tr>
+                <td colspan="6">
+                    <span>
+                        4. Kami tidak bertanggung jawab atas kehilangan/kerusakan program/data atau media penyimpanan yang dapat dipindahkan/dilepas
+                    </span>
+                </td>
+            </tr>   
+            <tr>
+                <td colspan="6">
+                    <span>
+                        5. Service yang dilakukan adalah sesuai dengan keluhan yang disampaikan (berikan keterangan yang jelas mengenai kerusakan).
+                    </span>
+                </td>
+            </tr>   
+            <tr>
+                <td colspan="6">
+                    <span>
+                        6. Kami berhak menolak / membatalkan Service, bila kami menilai biaya perbaikan sudah tidak ekonomis, misal: umur barang sudah terlalu tua, dll.
+                    </span>
+                </td>
+            </tr>   
+            <tr>
+                <td colspan="6">
+                    <span>
+                        7. Kami berhak menolak / membatalkan Service, bila barang dilakukan modifikasi, penukaran, pengubahan, pengecekan atau perbaikan yang tidak tepat atas permintaan sendiri atau pihak ketiga.
+                    </span>
+                </td>
+            </tr>   
+            <tr>
+                <td colspan="6">
+                    <span>
+                        8. Pada waktu pengambilan barang, harap dipastikan bahwa barang yang telah diservice dalam keadaan baik dan lengkap sesuai dengan data diatas, kerusakan harap segera dilaporkan ketika barang masih di tempat kami (Diluar daripada itu kami tidak bertanggung jawab).
+                    </span>
+                </td>
+            </tr>   
+            <tr>
+                <td colspan="6">
+                    <span>
+                        9. Dengan menandatangani Tanda Terima ini customer sudah menyetujui syarat-syarat yang tertera diatas.
+                    </span>
+                </td>
+            </tr>   
+        </table>        
+        <!--Section Remaks-->
+        <table class="table-borderless" width="100%" style="font-size: 10px;">
+            <!--ini section line-->
+            <tr>
+                <td colspan="6" style="text-align:center; border-bottom: 2px solid black;"/>
+            </tr>
+            <tr class="text-left" style="margin-top:20px">
+                <td/>
+            </tr>
+            
+            
+            <tr>
+                <td colspan="3" class="text-center">
+                    <strong>Diserahkan oleh,</strong>
+                </td>
+                <td colspan="3" class="text-center">
+                    <strong>Diterima Oleh</strong>
+                </td>
+            </tr>  
+            
+            <tr style="height:60px;"> 
+            </tr>  
+            
+            <tr>
+                <td colspan="3" class="text-center">
+                    <span>
+                        <i>
+                            Tanda Tangan &amp; Nama Lengkap
+                        </i>
+                    </span>
+                </td>
+                <td colspan="3" class="text-center">
+                    <span>
+                        <i>
+                            Tanda Tangan &amp; Nama Lengkap
+                        </i>
+                    </span>
+                </td>
+            </tr>  
+        </table>        
+    </div>
+</t>

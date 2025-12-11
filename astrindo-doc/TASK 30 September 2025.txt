@@ -1,0 +1,51 @@
+TASK 30 September 2025
+1. Delivery dot matric
+
+LINK
+https://www.falinwa.com/odoo/project.task/38034
+
+TEST == LOT Product
+https://astrindo-staging-24056890.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_5b4af5f3-897b-43ce-91e0-d33cf88b500d/64
+
+TEST ==  NON LOT Product
+https://astrindo-staging-24056890.dev.odoo.com/odoo/deliveries/63
+
+REVISI:
+- tambah kolom lot/serial number
+contoh: lot1,lot2,lot3
+
+2. Appropal report: [FAL] purchase request 
+
+REVISI
+- hide kolom vendor di product list
+- tambah kolom vendor setelah  Tujuan dibawah product List
+
+Link
+https://www.falinwa.com/odoo/project.task/38020
+
+Test:
+https://astrindo-staging-24056890.dev.odoo.com/report/pdf/approvals.report_approval_request_copy_1/2
+
+
+
+https://docs.google.com/spreadsheets/d/19-_cvzbn5FM66ZudGhU5-SInt_2wuTkNI8Ub4Y7m374/edit?gid=0#gid=0
+
+
+requirement.txt
+pip install python-bidi==0.6.6
+pip install rtl==0.4.3
+pip install opencv-python==4.12.0.88
+
+
+
+
+
+
+1. https://www.falinwa.com/odoo/action-3136/4446/action-477/42468			== fal_image_export_to_excel
+2. https://www.falinwa.com/odoo/action-3136/4446/action-477/42404			== fal_drawing_engine
+
+
+create how to test
+fal_drawing_engine
+fal_image_export_to_excel
+fal_delivery_report

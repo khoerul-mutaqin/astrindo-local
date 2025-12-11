@@ -1,0 +1,16 @@
+TASK 22 SEPTEMBER 2025
+
+
+https://www.odoo.sh/project/falinwasales-wahyu-abadi-v18-demo
+
+https://www.odoo.sh/project/falinwalimited-wahyu-abadi-demov17
+
+1. Report SO
+
+
+2. Report
+Print out Kwitansi materia
+
+id = 7
+
+id=8

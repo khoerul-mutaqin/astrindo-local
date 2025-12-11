@@ -1,0 +1,483 @@
+<t t-name="studio_report_document">
+    <t t-call="web.external_layout">
+        <div class="page">
+            <!--<table class="table-borderless o_ignore_layout_styling" width="100%">-->
+            <!--    <thead>-->
+            <!--        <tr>-->
+            <!--            <td colspan="2" width="35%" style="border: none !important;">-->
+            <!--            </td>-->
+            <!--            <td colspan="2" style="text-align:center; border-bottom: 2px solid black; border-top: none !important; border-left: none !important; border-right: none !important;" width="30%">-->
+            <!--                <strong>SALE ORDER</strong>-->
+            <!--            </td>-->
+            <!--            <td colspan="2" width="35%" style="border: none !important;">-->
+            <!--            </td>-->
+            <!--        </tr>-->
+            <!--    </thead>-->
+            <!--    <tbody>-->
+            <!--        <tr>-->
+            <!--            <td colspan="2" style="border: none !important;">-->
+            <!--            </td>-->
+            <!--            <td colspan="2" style="text-align:center; border: none !important;" width="30%">-->
+            <!--                <strong>-->
+            <!--                    <span t-field="doc.name"/>-->
+            <!--                </strong>-->
+            <!--            </td>-->
+            <!--            <td colspan="2" style="border: none !important;">-->
+            <!--            </td>-->
+            <!--        </tr>-->
+            <!--    </tbody>-->
+            <!--</table>-->
+
+            <!--Section Quotation-->
+            <table class="table-borderless o_ignore_layout_styling" width="100%">
+
+                <!--section quotation-->
+                <tr class="text-left">
+                    <td colspan="6">
+                            <strong>
+                                <span style="font-size:36px;">QUOTATION</span>
+                            </strong>
+                    </td>
+                </tr>
+
+                <!--section No-->
+                <tr class="text-left">
+                    <td colspan="1" width="20%">
+                        <span>No </span>
+                    </td>
+                    <td colspan="2">
+                     :
+                        <span t-field="doc.name"/>
+                    </td>
+                    <td colspan="3">
+                        <!--<span t-field="doc.partner_shipping_id"/>-->
+                    </td>
+                </tr>
+                
+                <tr class="text-left">
+                    <td colspan="1">
+                        <span>Date </span>
+                    </td>
+                    <td colspan="2">
+                     :
+                        <span t-field="doc.date_order" t-options="{&quot;widget&quot;: &quot;datetime&quot;, &quot;format&quot;: &quot;dd MMM yyyy HH:mm:ss&quot;}"/>
+                    </td>
+                    <td colspan="3">
+                        <!--<span t-field="doc.partner_shipping_id"/>-->
+                    </td>
+                </tr>
+
+                <tr class="text-left">
+                    <td colspan="1">
+                        <span>Customer </span>
+                    </td>
+                    <td colspan="2">
+                     :
+                    <t t-if="doc.partner_shipping_id">
+                        <span t-field="doc.partner_shipping_id"/>,
+                    </t>
+                    <t t-if="doc.partner_shipping_id.street">
+                        <span t-field="doc.partner_shipping_id.street"/>,
+                    </t>
+                    <t t-if="doc.partner_shipping_id.street2">
+                        <span t-field="doc.partner_shipping_id.street2"/>,
+                    </t>
+                    <t t-if="doc.partner_shipping_id.city">
+                        <span t-field="doc.partner_shipping_id.city"/>,
+                    </t>
+                    <t t-if="doc.partner_shipping_id.country_id">
+                        <span t-field="doc.partner_shipping_id.country_id"/>
+                    </t>
+                    <!--<t t-if="doc.partner_shipping_id.vat">-->
+                    <!--    <span t-field="doc.partner_shipping_id.vat"/>-->
+                    <!--</t>-->
+                    
+                    </td>
+                    <td colspan="3">
+                        <!--<span t-field="doc.partner_shipping_id"/>-->
+                    </td>
+                </tr>
+                
+                <tr class="text-left">
+                    <td colspan="1">
+                        <span>Phone </span>
+                    </td>
+                    <td colspan="2">
+                     :
+                        <span t-field="doc.partner_shipping_id.phone"/>
+                    </td>
+                    <td colspan="3">
+                        <!--<span t-field="doc.partner_shipping_id"/>-->
+                    </td>
+                </tr>
+                
+                <tr class="text-left">
+                    <td colspan="1">
+                        <span>Fax </span>
+                    </td>
+                    <td colspan="2">
+                     :
+                        <span t-field="doc.partner_shipping_id.email"/>
+                    </td>
+                    <td colspan="3">
+                        <!--<span t-field="doc.partner_shipping_id"/>-->
+                    </td>
+                </tr>
+                
+                <tr class="text-left">
+                    <td colspan="1">
+                        <span>Attention </span>
+                    </td>
+                    <td colspan="2">
+                     :
+                        <span t-field="doc.x_studio_customer_name_marketplace"/>
+                    </td>
+                    <td colspan="3">
+                        <!--<span t-field="doc.partner_shipping_id"/>-->
+                    </td>
+                </tr>
+            </table>
+            <br/> 
+            
+            <!--Section Dear madam-->
+            <!--<table class="table-borderless o_ignore_layout_styling" width="100%">-->
+            <!--    <tr class="text-left">-->
+            <!--        <td colspan="6">-->
+            <!--            <span>Dear Madame/Sir,<br/>-->
+            <!--            Thank you for the opportunity that has been given to PT. Astrindo Starvision as Seagate Authorized Distributor in applying quotation of product with specification as follow: </span>-->
+            <!--        </td>-->
+            <!--    </tr>-->
+            <!--</table>-->
+            <br/> 
+            
+            <!-- Is there a discount on at least one line? -->
+            <!--<t t-set="lines_to_report" t-value="doc._get_order_lines_to_report()"/>-->
+            <t t-set="lines_to_report" t-value="doc._get_order_lines_to_report().filtered(lambda l: l.product_id.name not in ['Discount','Materai'])"/>
+            <!--<t t-set="lines_to_report" t-value="doc.order_line.filtered(lambda l: l.product_id.name not in ['Discount','Materai'])"/>-->
+            <t t-set="display_discount" t-value="any(l.discount for l in lines_to_report)"/>
+            <div class="oe_structure"/>
+            <table class="o_has_total_table table o_main_table table-borderless">
+                <!-- In case we want to repeat the header, remove "display: table-row-group" -->
+                <thead style="display: table-row-group">
+                    <tr>
+                        <th name="th_number" class="text-start">No</th>
+                        <th name="td_name_code" class="text-start">Product Number</th>
+                        <th name="th_description" class="text-start">Description</th>
+                        <th name="th_quantity" class="text-end text-nowrap">Quantity</th>
+                        <th name="th_priceunit" class="text-end text-nowrap">Unit Price</th>
+                        <th name="th_discount" t-if="display_discount" class="text-end">
+                            <span>Disc.%</span>
+                        </th>
+                        <!--<th name="th_taxes" class="text-end">Taxes</th>-->
+                        <th name="th_subtotal" class="text-end">
+                            <span>Amount</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="sale_tbody">
+                    <t t-set="current_subtotal" t-value="0"/>
+                    <t t-set="line_number" t-value="0"/>                    
+                    <t t-foreach="lines_to_report" t-as="line">
+                        <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal"/>
+                        <!--<tr t-att-class="'fw-bold o_line_section' if (                                 line.display_type == 'line_section'                                 or line.product_type == 'combo'                             )                             else 'fst-italic o_line_note' if line.display_type == 'line_note'                             else ''">-->
+                        <tr>
+                            <t t-if="not line.display_type and line.product_type != 'combo'">
+                                <!-- Tampilkan nomor urut -->
+                                <t t-set="line_number" t-value="line_number + 1"/>
+                                <td>
+                                   <t t-esc="line_number"/> 
+                                </td>
+                                
+                                <td name="td_name_code">
+                                    <span t-field="line.product_id.default_code"/>
+                                </td>
+                                <td name="td_name">
+                                    <t t-if="not is_downpayment">
+                                        <span t-field="line.product_id.name"/>
+                                    </t>
+                                    <t t-if="is_downpayment">
+                                        <span t-field="line.name"/>
+                                    </t>
+                                </td>
+                                <td name="td_quantity" class="o_td_quantity text-end">
+                                    <span t-field="line.product_uom_qty" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 0}" class="text-nowrap">3</span>
+                                    <span t-field="line.product_uom">units</span>
+                                    <span t-if="line.product_packaging_id">
+                                        (
+                                        <!--<span t-field="line.product_packaging_qty" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 0}"/>-->
+                                        <span t-field="line.product_packaging_id"/>
+                                        )
+                                    </span>
+                                </td>
+                                <td name="td_priceunit" class="text-end text-nowrap">
+                                    <span t-field="line.price_unit">3</span>
+                                </td>
+                                <td name="td_priceunit" class="text-end text-nowrap">
+                                    <span t-esc="line.product_uom_qty * line.price_unit" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.currency_id}">27.00</span>
+                                </td>
+                            </t>
+                            <t t-elif="line.display_type == 'line_section' or line.product_type == 'combo'">
+                                <td name="td_section_line" colspan="99">
+                                    <span t-field="line.name">A section title</span>
+                                </td>
+                                <t t-set="current_section" t-value="line"/>
+                                <t t-set="current_subtotal" t-value="0"/>
+                            </t>
+                            <t t-elif="line.display_type == 'line_note'">
+                                <td name="td_note_line" colspan="99">
+                                    <span t-field="line.name">A note, whose content usually applies to the section or product above.</span>
+                                </td>
+                            </t>
+                        </tr>
+                        <t t-if="current_section and (                                 line_last                                 or lines_to_report[line_index+1].display_type == 'line_section'                                 or lines_to_report[line_index+1].product_type == 'combo'                                 or (                                     line.combo_item_id                                     and not lines_to_report[line_index+1].combo_item_id                                 )                             ) and not line.is_downpayment">
+                            <t t-set="current_section" t-value="None"/>
+                            <tr class="is-subtotal text-end">
+                                <td name="td_section_subtotal" colspan="99">
+                                    <strong class="mr16">Subtotal</strong>
+                                    <span t-out="current_subtotal" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.currency_id}">31.05</span>
+                                </td>
+                            </tr>
+                        </t>
+                    </t>
+                </tbody>
+            </table>
+             <!--<br /> -->
+            <div class="clearfix" name="so_total_summary">
+                <div id="total" class="row mt-n3" name="total">
+                    <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ms-auto">
+                        <table class="o_total_table table table-borderless">
+                            <!-- Tax totals -->
+                            <t>
+                                <t t-set="tax_totals" t-value="doc.tax_totals"/>
+                                <t t-set="currency" t-value="doc.currency_id"/>
+
+                                <t t-name="account.document_tax_totals_template">
+                                            <!--
+                                                Generic template to display tax totals in pdf reports.
+                                                Used by invoices, SO and PO.
+                                
+                                                ARGUMENTS:
+                                                - currency: The res.currency to use.
+                                                - tax_totals: dict in the form generated by account.move's _get_tax_totals.
+                                            -->
+                                            <t t-set="same_tax_base" t-value="tax_totals['same_tax_base']"/>
+                                            <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
+                                                <tr class="o_subtotal">
+                                                    <td>
+                                                        <span t-out="subtotal['name']">Untaxed Amount</span>
+                                                    </td>
+                                                    <td class="text-end">
+                                                        <span t-att-class="oe_subtotal_footer_separator" t-out="subtotal['base_amount_currency']" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: currency}">27.00</span>
+                                                    </td>
+                                                </tr>
+                                
+                                                <t t-foreach="subtotal['tax_groups']" t-as="tax_group">
+                                                    <tr class="o_taxes">
+                                                        <!--<t t-if="same_tax_base or tax_group['display_base_amount_currency'] is None">-->
+                                                        <t>
+                                                            <td style="max-width: 200px;">
+                                                                <!--<span t-out="tax_group['group_name']">Tax 15%</span>-->
+                                                                <span>Taxes</span>
+                                                            </td>
+                                                            <td class="text-end o_price_total">
+                                                                <!--<span class="text-nowrap" t-out="tax_group['tax_amount_currency']" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: currency}">1.05</span>-->
+                                                                <span class="text-nowrap" t-field="doc.amount_tax" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: currency}">1.05</span>
+                                                            </td>
+                                                        </t>
+                                                        <!--<t t-else="">-->
+                                                        <!--    <td>-->
+                                                        <!--        <span t-out="tax_group['group_name']">Tax 15%</span>-->
+                                                        <!--        <span> on </span>-->
+                                                        <!--        <span class="text-nowrap" t-out="tax_group['display_base_amount_currency']" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: currency}">27.00</span>-->
+                                                        <!--    </td>-->
+                                                        <!--    <td class="text-end o_price_total">-->
+                                                        <!--        <span class="text-nowrap" t-out="tax_group['tax_amount_currency']" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: currency}">4.05</span>-->
+                                                        <!--    </td>-->
+                                                        <!--</t>-->
+                                                    </tr> 
+                                                </t>
+                                            </t>
+                                
+                                            <tr t-if="'cash_rounding_base_amount_currency' in tax_totals">
+                                                <td>Rounding</td>
+                                                <td class="text-end">
+                                                    <span t-out="tax_totals['cash_rounding_base_amount_currency']" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: currency}">0</span>
+                                                </td>
+                                            </tr>
+                                           
+                                            <t t-set="is_materai" t-value="0"/>   
+                                            
+                                            <t t-set="materai" t-value="env['product.product'].search([('name', '=', 'Materai' )], limit=1)"/>                 
+                                            <t t-if="doc.order_line.filtered(lambda l: l.product_id.name == 'Materai')">
+                                                <t t-set="is_materai" t-value="true"/>                 
+                                            </t>
+                                            <t t-set="is_discount" t-value="0"/>                 
+                                            <t t-if="doc.order_line.filtered(lambda l: l.product_id.name == 'Discount')">
+                                                <t t-set="is_discount" t-value="true"/>
+                                                <t t-set="discount_value" t-value="doc._get_order_lines_to_report().filtered(lambda l: l.product_id.name in ['Discount'])"/>                                                
+                                            </t>
+
+                                           <!-- Discount section-->
+                                            <tr t-if="is_discount">                                            
+                                                <td>Discount</td>
+                                                <td class="text-end">
+                                                    <span t-esc="abs(discount_value.price_unit)" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: currency}"/>
+                                                </td>
+                                            </tr>
+
+                                           <!-- Section materai-->
+                                            <tr t-if="is_materai">                                                     
+                                                <td>Materai</td>
+                                                <td class="text-end">
+                                                    <span> Rp 10.000,00</span>
+                                                    <!--<span t-field="materai.list_price" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: currency}">0</span>-->
+                                                </td>
+                                            </tr>
+                                            
+                                            <!--Total amount with all taxes-->
+                                            <tr class="o_total">
+                                                <td><strong>Total</strong></td>
+                                                <td class="text-end">
+                                                    <strong t-out="tax_totals['total_amount_currency']" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: currency}">31.05</strong>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                </t>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+             <br/> 
+             
+            <!--Section Remaks-->
+            <table class="table-borderless o_ignore_layout_styling" width="100%">
+                <tr>
+                    <td colspan="6">
+                        <span>Terms and Conditions</span>
+    		            <!--<br/><span t-field="doc.note"/> -->
+                    </td>
+                </tr>    
+                <tr class="text-left">
+                    <td colspan="1" width="20%">
+                        <span>Payment </span>
+                    </td>
+                    <td colspan="2">
+                     :
+                        <span t-field="doc.payment_term_id"/>
+                    </td>
+                    <td colspan="3">
+                        <!--<span t-field="doc.partner_shipping_id"/>-->
+                    </td>
+                </tr>  
+                <tr class="text-left">
+                    <td colspan="1">
+                        <span>Delivery </span>
+                    </td>
+                    <td colspan="2">
+                     :
+                        <span>1 Weeks</span>
+                    </td>
+                    <td colspan="3">
+                        <!--<span t-field="doc.partner_shipping_id"/>-->
+                    </td>
+                </tr>  
+                <tr class="text-left">
+                    <td colspan="1">
+                        <span>Canceliation Fee </span>
+                    </td>
+                    <td colspan="2">
+                     :
+                        <span>50% If PO already submit</span>
+                    </td>
+                    <td colspan="3">
+                        <!--<span t-field="doc.partner_shipping_id"/>-->
+                    </td>
+                </tr>  
+            </table>        
+            <br/>
+             
+            <!--Section Pembayaran-->
+            <table class="table-borderless o_ignore_layout_styling" width="100%">
+
+                <tr class="text-left">
+                    <td colspan="1" width="20%">
+                        <span>Pembayaran atas nama</span>
+                    </td>
+                    <td colspan="2">
+                     :
+                        <span t-field="doc.partner_shipping_id"/>
+                    </td>
+                    <td colspan="3">
+                    </td>
+                </tr>  
+                <tr class="text-left">
+                    <td colspan="1" width="20%">
+                        <span>Rek. Bank BCA</span>
+                    </td>
+                    <td colspan="2">
+                     :
+                        <span>480-021-1331</span>
+                        <!--<span t-field="doc.partner_shipping_id"/>-->
+                    </td>
+                    <td colspan="3">
+                    </td>
+                </tr>  
+                <tr class="text-left">
+                    <td colspan="1" width="20%">
+                        <span>Rek. Bank Maybank</span>
+                    </td>
+                    <td colspan="2">
+                     :
+                        <span>2-160-006-894</span>
+                    </td>
+                    <td colspan="3">
+                    </td>
+                </tr>  
+            </table>        
+            <br/>
+             
+            <!--Section Submitted-->
+            <table class="table-borderless o_ignore_layout_styling" width="100%">
+                <tr class="text-left">
+                    <td colspan="6">
+                        <span>Submitted by :</span>
+                    </td>
+                </tr>  
+            </table>
+            <br/>
+           
+            <!--Section sales-->
+            <table class="table-borderless o_ignore_layout_styling" width="100%">
+                <tr class="text-left">
+                    <td colspan="1" width="20%">
+                        <span>Sales</span>
+                    </td>
+                    <td colspan="2">
+                     :
+                        <span t-field="doc.salesman_id"/>
+                    </td>
+                    <td colspan="3">
+                    </td>
+                </tr>  
+                <tr class="text-left">
+                    <td colspan="1" width="20%">
+                        <span>Mail to</span>
+                    </td>
+                    <td colspan="2">
+                     :
+                        <span t-field="doc.salesman_id.work_email"/>
+                    </td>
+                    <td colspan="3">
+                    </td>
+                </tr>  
+                <tr class="text-left">
+                    <td colspan="6">
+                        <span>* Payment must be in full amount</span>
+                    </td>
+                </tr>  
+            </table>        
+            <br/>
+        </div>
+    </t>
+</t>

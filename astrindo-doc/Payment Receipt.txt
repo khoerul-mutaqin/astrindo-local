@@ -1,0 +1,78 @@
+<data>
+
+    <xpath position="after" expr="/t[@t-name='account.report_payment_receipt_document']//t[@t-call='web.external_layout']/div" meta-class="page">
+        <!-- jika approver payment diganti , maka ubah juga id nya [user1, user2, user3]-->
+        <!-- Jesslyn Octaviani, Serly (Fin) -->
+        <t t-set="user1" t-value="env['res.partner'].browse(165)"/>
+        <!-- Monica Liu -->
+        <t t-set="user2" t-value="env['res.partner'].browse(167)"/>
+        <!-- Lusianah Tjhia -->
+        <t t-set="user3" t-value="env['res.partner'].browse(166)"/>
+        <t t-set="res_id" t-value="o.id"/>
+        <!--model == account.payment -->
+        <t t-set="model" t-value="o._name"/>
+        <!--get record message-->
+        <t t-set="domain1" t-value="[('res_id', '=', res_id), ('model', '=', model), ('author_id', '=', user1.id)]"/>
+        <t t-set="domain2" t-value="[('res_id', '=', res_id), ('model', '=', model), ('author_id', '=', user2.id)]"/>
+        <t t-set="domain3" t-value="[('res_id', '=', res_id), ('model', '=', model), ('author_id', '=', user3.id)]"/>
+        <t t-set="approval_1" t-value="env['mail.message'].search(domain1, limit=1)"/>
+        <t t-set="approval_2" t-value="env['mail.message'].search(domain2, limit=1)"/>
+        <t t-set="approval_3" t-value="env['mail.message'].search(domain3, limit=1)"/>
+
+        <table class="table o_table table-borderless">
+            <tbody>
+                <tr>
+                    <td>
+                        Created
+                    </td>
+                    <td>
+                        Approved I
+                    </td>
+                    <td>
+                        Approved II
+                    </td>
+                    <td>
+                        Approved III
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span t-field="o.create_uid"/>
+                        <br/>
+                        <span t-field="o.create_date"/>
+                    </td>
+                    <td>
+                        <t t-if="approval_1">
+                            <span t-field="approval_1.author_id.name"/>
+                            <br/>
+                            <span t-field="approval_1.date"/>
+                        </t>
+                        <t t-else="">
+                             Not Approved
+                        </t>
+                    </td>
+                    <td>
+                        <t t-if="approval_2">
+                            <span t-field="approval_2.author_id.name"/>
+                            <br/>
+                            <span t-field="approval_2.date"/>
+                        </t>
+                        <t t-else="">
+                             Not Approved
+                        </t>
+                    </td>
+                    <td>
+                        <t t-if="approval_3">
+                            <span t-field="approval_3.author_id.name"/>
+                            <br/>
+                            <span t-field="approval_3.date"/>
+                        </t>
+                        <t t-else="">
+                             Not Approved
+                        </t>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </xpath>
+</data>

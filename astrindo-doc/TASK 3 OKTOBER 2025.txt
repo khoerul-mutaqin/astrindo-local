@@ -1,0 +1,12 @@
+TASK 3 Okt 2025
+
+1. https://www.falinwa.com/odoo/action-3136/4446/action-477/42254			== fal_activity_server_action
+2. https://www.falinwa.com/odoo/action-3136/4446/action-477/42253			== fal_activity_meeting	
+3. https://www.falinwa.com/odoo/action-3136/4446/action-477/42215			== cds_access_right_studio belum
+
+create how to test
+fal_drawing_engine 		== OK							== 1 OKT Naik v19_test
+fal_image_export_to_excel	== OK							== 2 OKT Naik v19_test
+fal_delivery_report		== OK							== 1 OKT Naik v19_test
+fal_activity_server_action	== OK 							== 2 OKT Naik v19_test
+fal_activity_meeting		== OK 							== 2 OKT Naik v19_test

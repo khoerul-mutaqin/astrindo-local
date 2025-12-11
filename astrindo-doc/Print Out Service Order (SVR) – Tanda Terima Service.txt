@@ -1,0 +1,435 @@
+<t t-name="studio_report_document">
+    <div class="page">
+        <br/>
+        <!--Section Header-->
+        <table class="table-borderless" width="100%">
+
+            <tr class="text-left">
+                <td colspan="6">
+                    <span>
+                        <STRONG>
+                            <!--<span t-esc="doc.company_id.name.upper()"/>-->
+                             ASTRINDO STARVISION
+                        </STRONG>
+                    </span>
+                </td>
+            </tr>
+            <tr class="text-left">
+                <td colspan="6" style="font-size:10px">
+                    <STRONG>
+                        <span>
+                            Service Center
+                        </span>
+                    </STRONG>
+                </td>
+            </tr>
+            <tr class="text-left">
+                <td colspan="6" style="font-size:10px">
+                    <strong>
+                        <span t-esc="doc.company_id.street"/>
+                    </strong>
+                </td>
+            </tr>
+            <tr class="text-left">
+                <td colspan="3" style="font-size:10px">
+                    <strong>
+                        <span t-esc="doc.company_id.street2"/>
+                    </strong>
+                </td>
+                <td colspan="3" style="text-align:right; font-size:10px">
+                    <strong>
+                        <span> Invoice - Bukti Service</span>
+                    </strong>
+                </td>
+            </tr>
+            <tr class="text-left">
+                <td colspan="3" style="font-size:10px">
+                    <strong>
+                        <span t-esc="doc.company_id.city"/>
+                        <span t-esc="doc.company_id.zip"/>
+                    </strong>
+                </td>
+                <td colspan="3" style="text-align:right; font-size:10px">
+                    <strong>
+                        <span t-esc="doc.ticket_ref"/>
+                    </strong>
+                </td>
+            </tr>
+            <tr class="text-left">
+                <td colspan="6" style="font-size:10px">
+                    <strong>
+                        TELP : <span t-esc="doc.company_id.phone"/>
+ |
+                        Whatsapp : <span t-esc="doc.company_id.phone"/>
+                </strong>
+            </td>
+        </tr>
+    </table>
+
+    <!--Section Customer Repair-->
+    <t t-if="doc.x_studio_product_change">
+        <table class="table-borderless" style="margin-top: 20px; width: 100%; font-size: 10px;">
+            <tbody>
+                <tr class="text-left" style="margin-top:20px;">
+                    <td width="13%">Nama</td>
+                    <td width="37%">:
+                        <t t-if="doc.partner_id">
+                            <span t-esc="doc.partner_id.name[:15]"/>
+                        </t>
+                        <t t-if="doc.partner_id.street">
+                            <span/>
+                        </t>
+
+                    </td>
+                    <td width="13%">
+                        <span>Nama Merek</span>
+                    </td>
+                    <td width="37%">:                        <span t-field="doc.x_studio_product_2.name"/>
+                    </td>
+                </tr>
+                <tr class="text-left">
+                    <td width="13%" style="vertical-align: top;">Alamat</td>
+                    <td width="37%" style="vertical-align: top;">:
+                        <t t-if="doc.partner_id.street">
+                            <span t-field="doc.partner_id.street"/>
+                            <br/>
+                        </t>
+                    </td>
+                    <td width="13%">
+                        <span>Nama Model</span>
+                    </td>
+                    <td width="37%">:                        <span t-field="doc.x_studio_nama_model_1"/>
+                    </td>
+                </tr>
+                <tr class="text-left">
+                    <td width="13%"/>
+                    <td width="37%">:
+                        <t t-if="doc.partner_id.street2">
+                            <span t-field="doc.partner_id.street2"/>
+                            <br/>
+                        </t>
+                    </td>
+                    <td width="13%">
+                        <span>No Seri</span>
+                    </td>
+                    <td width="37%">:                        <span t-field="doc.x_studio_serial_number"/>
+                    </td>
+                </tr>
+                <tr class="text-left">
+                    <td width="13%"/>
+                    <td width="37%">:
+                        <t t-if="doc.partner_id.city">
+                            <span t-field="doc.partner_id.city"/>
+                            <span t-field="doc.partner_id.zip"/>
+                        </t>
+                    </td>
+                    <td width="13%">
+                        <span>Tgl SR</span>
+                    </td>
+                    <td width="37%">:                        <span t-field="doc.x_studio_tanggal_pembelian"/>
+                    </td>
+                </tr>
+                <tr class="text-left">
+                    <td width="13%"/>
+                    <td width="37%">:
+                        <t t-if="doc.partner_id.country_id">
+                            <span t-field="doc.partner_id.country_id"/>
+                            <br/>
+                        </t>
+                    </td>
+                    <td width="13%">
+                        <span>So No</span>
+                    </td>
+                    <td width="37%">:                        <span t-field="doc.ticket_ref"/>
+                    </td>
+                </tr>
+                <tr class="text-left">
+                    <td width="13%"/>
+                    <td width="37%">:
+                        <t t-if="doc.partner_id.vat">
+                    NPWP <span t-field="doc.partner_id.vat"/>
+                        </t>
+                    </td>
+                    <td width="13%">
+                        <span/>
+                    </td>
+                    <td width="37%">
+                    </td>
+                </tr>
+
+                <tr class="text-left">
+                    <td width="13%">Telp </td>
+                    <td width="37%">:                        <span t-field="doc.partner_id.phone"/>
+                    </td>
+                    <td width="13%">
+                        <span/>
+                    </td>
+                    <td width="37%">
+                    </td>
+                </tr>
+
+                <tr class="text-left">
+                    <td width="13%">Handphone</td>
+                    <td width="37%">:                        <span t-field="doc.partner_id.phone"/>
+                    </td>
+                    <td/>
+                    <td/>
+                </tr>
+                <!--<tr>-->
+                <!--    <td colspan="4" style="text-align:center; border-bottom: 2px solid black;"/>-->
+                <!--</tr>-->
+            </tbody>
+        </table>
+    </t>
+    <t t-if="not doc.x_studio_product_change">
+        <table class="table-borderless" style="margin-top: 20px; width: 100%; font-size: 10px;">
+            <tbody>
+                <!--<tr>-->
+                <!--    <td colspan="4" style="text-align:center; border-bottom: 2px solid black;">-->
+                <!--    </td>-->
+                <!--</tr>-->
+
+                <tr class="text-left" style="margin-top:20px;">
+                    <td width="13%">Nama</td>
+                    <td width="37%">:
+                        <t t-if="doc.partner_id">
+                            <span t-esc="doc.partner_id.name[:15]"/>
+                        </t>
+                        <t t-if="doc.partner_id.street">
+                            <span/>
+                        </t>
+
+                    </td>
+                    <td width="13%">
+                        <span>Nama Merek</span>
+                    </td>
+                    <td width="37%">:                        <span t-field="doc.x_studio_product.name"/>
+                    </td>
+                </tr>
+                <tr class="text-left">
+                    <td width="13%" style="vertical-align: top;">Alamat</td>
+                    <td width="37%" style="vertical-align: top;">:
+                        <t t-if="doc.partner_id.street">
+                            <span t-field="doc.partner_id.street"/>
+                            <br/>
+                        </t>
+                    </td>
+                    <td width="13%">
+                        <span>Nama Model</span>
+                    </td>
+                    <td width="37%">:                        <span t-field="doc.x_studio_nama_model"/>
+                    </td>
+                </tr>
+                <tr class="text-left">
+                    <td width="13%"/>
+                    <td width="37%">:
+                        <t t-if="doc.partner_id.street2">
+                            <span t-field="doc.partner_id.street2"/>
+                            <br/>
+                        </t>
+                    </td>
+                    <td width="13%">
+                        <span>Nama Merek</span>
+                    </td>
+                    <td width="37%">:                        <span t-field="doc.x_studio_product.name"/>
+                    </td>
+                </tr>
+                <tr class="text-left">
+                    <td width="13%"/>
+                    <td width="37%">:
+                        <t t-if="doc.partner_id.city">
+                            <span t-field="doc.partner_id.city"/>
+                            <span t-field="doc.partner_id.zip"/>
+                        </t>
+                    </td>
+                    <td width="13%">
+                        <span>No Seri</span>
+                    </td>
+                    <td width="37%">:                        <span t-field="doc.x_studio_serial_numbe"/>
+                    </td>
+                </tr>
+                <tr class="text-left">
+                    <td width="13%"/>
+                    <td width="37%">:
+                        <t t-if="doc.partner_id.country_id">
+                            <span t-field="doc.partner_id.country_id"/>
+                            <br/>
+                        </t>
+                    </td>
+                    <td width="13%">
+                        <span>Tgl SR</span>
+                    </td>
+                    <td width="37%">:                        <span t-field="doc.x_studio_tanggal_pembelian"/>
+                    </td>
+                </tr>
+                <tr class="text-left">
+                    <td width="13%"/>
+                    <td width="37%">:
+                        <t t-if="doc.partner_id.vat">
+                    NPWP <span t-field="doc.partner_id.vat"/>
+                        </t>
+                    </td>
+                    <td width="13%">
+                        <span>So No</span>
+                    </td>
+                    <td width="37%">:                        <span t-field="doc.ticket_ref"/>
+                    </td>
+                </tr>
+
+                <tr class="text-left">
+                    <td width="13%">Telp </td>
+                    <td width="37%">:                        <span t-field="doc.partner_id.phone"/>
+                    </td>
+                    <td width="13%">
+                        <span/>
+                    </td>
+                    <td width="37%">
+                    </td>
+                </tr>
+
+                <tr class="text-left">
+                    <td width="13%">Handphone</td>
+                    <td width="37%">:                        <span t-field="doc.partner_id.phone"/>
+                    </td>
+                    <td/>
+                    <td/>
+                </tr>
+                <!--<tr>-->
+                <!--    <td colspan="4" style="text-align:center; border-bottom: 2px solid black;"/>-->
+                <!--</tr>-->
+            </tbody>
+        </table>
+    </t>
+
+    <br/>
+
+    <!--Section Product-->
+    <table class="o_has_total_table table o_main_table" border="1" style="font-size: 10px;">
+        <!-- In case we want to repeat the header, remove "display: table-row-group" -->
+        <thead style="display: table-row-group">
+            <tr>
+                <td>
+                    <b>Product No</b>
+                </td>
+                <td>
+                    <b>Description</b>
+                </td>
+                <td>
+                    <b>Serial No</b>
+                </td>
+                <td>
+                    <b>Qty</b>
+                </td>
+            </tr>
+        </thead>
+        <tbody class="sale_tbody">
+            <t t-if="not doc.x_studio_product_change">
+                <tr>
+                    <td>
+                        <span t-field="doc.x_studio_product.default_code"/>
+                    </td>
+                    <td>
+                        <span t-field="doc.x_studio_product.name"/>
+                    </td>
+                    <td>
+                        <span t-field="doc.x_studio_serial_numbe"/>
+                    </td>
+                    <td>
+                        <span t-field="doc.x_studio_quantity" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 0}"/>
+                    </td>
+                </tr>
+            </t>
+            <t t-if="doc.x_studio_product_change">
+                <tr>
+                    <td>
+                        <span t-field="doc.x_studio_product_2.default_code"/>
+                    </td>
+                    <td>
+                        <span t-field="doc.x_studio_product_2.name"/>
+                    </td>
+                    <td>
+                        <span t-field="doc.x_studio_serial_number"/>
+                    </td>
+                    <td>
+                        <span t-field="doc.x_studio_quantity_1" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 0}"/>
+                    </td>
+                </tr>
+            </t>
+        </tbody>
+    </table>
+
+    <!--Section Remaks-->
+    <table class="table-borderless" width="100%" style="font-size: 10px;">
+        <!-- ini section line-->
+        <tr>
+            <td colspan="6">
+                <b>Note:</b>
+                <span t-field="doc.description"/>
+            </td>
+        </tr>
+        <tr class="text-left" style="margin-top:20px">
+            <td/>
+        </tr>
+    </table>
+    <br/>
+    <table class="table-borderless" width="100%" style="font-size: 10px;">
+
+        <tr>
+            <td colspan="3" class="text-center">
+                <strong>Diserahkan oleh,</strong>
+            </td>
+            <td colspan="3" class="text-center">
+                <strong>Diterima Oleh</strong>
+            </td>
+        </tr>
+
+        <tr style="height:60px;">
+        </tr>
+
+        <tr>
+            <td colspan="3" class="text-center">
+                <span>
+                    <i>
+                            Tanda Tangan &amp; Nama Lengkap
+                    </i>
+                </span>
+            </td>
+            <td colspan="3" class="text-center">
+                <span>
+                    <i>
+                            Tanda Tangan &amp; Nama Lengkap
+                    </i>
+                </span>
+            </td>
+        </tr>
+    </table>
+    <!--Section Syarat Dan Kondisi-->
+    <table class="table-borderless" width="100%" style="font-size: 10px;">
+        <tr>
+            <td colspan="6">
+                <strong>
+                    <!--SYARAT &amp; KONDISI-->
+                       CATATAN
+                </strong>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <span>
+                  1. Simpanlah invoice/BuktiService ini sebagai bukti Garansi Service
+
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <span>
+2. Harap dipastikan bahwa barang yang telah diservicei dalam keadaan baik dan lengkap sesuai dengan data diatas dan di Tanda Terima Service, kekurangan/kerusakan harap segera dilaporkan ketika barang masih ditempat kami (Di luar daripada itu kami tidak bertanggung jawab).
+
+                </span>
+            </td>
+        </tr>
+
+    </table>
+</div>
+</t>

@@ -1,0 +1,294 @@
+<t t-name="studio_report_document">
+    <div class="page">
+
+        <!--Section Header-->
+        <table class="table-borderless" width="100%">
+            <tr>
+                <td colspan="2" width="35%">
+                </td>
+                <td colspan="2" style="text-align:center; border-bottom: 2px solid black;" width="30%">
+                    <h4>
+                        <strong>DELIVERY ORDER</strong>
+                    </h4>
+                </td>
+                <td colspan="2" width="35%">
+                </td>
+            </tr>
+            <tr class="text-center">
+                <td colspan="6">
+                        <STRONG>
+                            No.  <span t-esc="doc.name"/>
+                        </STRONG>
+                </td>
+            </tr>            
+        </table>
+
+        <!--Section Delivery To :-->
+        <table class="table-borderless" width="100%">
+            <tr class="text-left">
+                <td colspan="6">
+                    <STRONG>
+                        <span>
+                            Delivery To:
+                        </span>
+                    </STRONG>
+                </td>
+            </tr>
+            
+            <tr class="text-left">
+                
+                <td colspan="3">
+                    <strong>
+                        <span t-esc="doc.partner_id.name"/>      
+                    </strong>
+                </td>
+                <td>
+                    <strong>
+                       SO No 
+                    </strong>
+                </td>
+                <td colspan="2">
+                    <strong>
+                     : <span t-esc="doc.origin"/> 
+                    </strong>
+                </td>
+            </tr>
+            
+            <tr class="text-left">
+                
+                <td colspan="3">
+                    <strong>
+                        <span t-esc="doc.partner_id.street"/>                    
+                    </strong>
+                </td>
+                <td>
+                    <strong>
+                       SO Date 
+                    </strong>
+                </td>
+                <td colspan="2">
+                    <strong>
+                     : <span t-field="doc.scheduled_date" t-options="{&quot;format&quot;: &quot;dd MMM yyyy HH:mm:ss&quot;}"/>
+                    </strong>
+                </td>
+            </tr>
+            
+            <tr class="text-left">
+                
+                <td colspan="3">
+                    <strong>
+                        <span t-esc="doc.partner_id.street2"/>                    
+                    </strong>
+                </td>
+                <td>
+                    <strong>
+                       Delivery Date 
+                    </strong>
+                </td>
+                <td colspan="2">
+                    <strong>
+                     : 
+                     <!--<span t-field="doc.date_done" t-options="{&quot;format&quot;: &quot;dd MMM yyyy&quot;}"/>  -->
+                     <t t-if="doc.date_done">
+                        <span t-field="doc.date_done" t-options="{&quot;format&quot;: &quot;dd MMM yyyy HH:mm:ss&quot;}"/>
+                     </t>
+                     <t t-else="">
+                         -
+                     </t>                          
+                    </strong>
+                </td>
+            </tr>
+            
+            <tr class="text-left">
+                <td colspan="3">
+                    <strong>
+                         <span t-field="doc.partner_id.country_id"/>               
+                        <span t-esc="doc.partner_id.zip"/>                
+                    </strong>
+                </td>
+                <td>
+                    <strong>
+
+                    </strong>
+                </td>
+                <td colspan="2">
+                    <strong>
+                    </strong>
+                </td>
+            </tr>
+        </table>
+        <br/>
+        
+        <!--Section Product-->
+        <table class="table" width="100%">
+            <tr class="text-left">
+                <td style="text-align:center">
+                    No
+                </td>
+                <td style="width: 20%;">
+                    Product Number
+                </td>
+                <td style="width: 20%;" >
+                    Description
+                </td>
+                <td style="text-align:center; width: 5%" >
+                     Quantity
+                </td>
+                <td style="text-align:center; width: 50%;" >
+                     LOT/SERIAL NUMBER
+                </td>
+            </tr> 
+            
+           <t t-set="line_number" t-value="0"/>  
+       	   <t t-foreach="doc.move_ids_without_package" t-as="line">
+                <tr class="text-left">
+                    <!-- Tampilkan nomor urut -->
+                    <t t-set="line_number" t-value="line_number + 1"/>
+                    <td style="text-align:center" >
+                       <t t-esc="line_number"/> 
+                    </td>
+                    <td>
+                        <span t-field="line.product_id.default_code"/>
+                    </td>
+                    <td>
+                        <span t-field="line.product_id" />
+                    </td>
+                    <td style="text-align:center" >
+                        <span t-field="line.quantity"/>
+                    </td>
+                    <td class="text-left" >
+                        <t  t-if="line.product_id.tracking in ['serial' ,'lot'] ">
+                            <t t-foreach="doc.move_line_ids_without_package" t-as="ml">
+                                <t t-if="ml.lot_id.name or ml.lot_name and ml.product_id == line.product_id ">
+                                    <span t-esc="ml.lot_id.name or ml.lot_name" />,
+                                </t>
+                            </t>
+                        </t>
+                    </td>
+                </tr>
+    	    </t>            
+
+        </table>
+        <br/>
+
+        <!--Section Remaks-->
+        <table class="table-borderless" width="100%">
+            <tr>
+                <td colspan="6">
+                    <strong>
+                        Remaks*
+                    </strong>
+                </td>
+            </tr>   
+            <tr height="60px">
+            </tr>   
+            <tr>
+                <td colspan="6">
+                     <span t-field="doc.company_id.city"/>, 
+                     <t t-if="doc.date_done">
+                        <span t-field="doc.date_done" t-options="{&quot;format&quot;: &quot;dd MMM yyyy HH:mm:ss&quot;}"/>
+                     </t>
+                     <t t-else="">
+                         -
+                     </t>
+                </td>
+            </tr>   
+        </table>        
+        <br/>
+
+        <!--Section Prepared By-->
+        <table class="table-borderless" width="100%">
+            <tr>
+                <td colspan="1" class="text-center">
+                    <strong>Prepared by:</strong>
+                </td>
+                <td colspan="1" class="text-center">
+                    <strong>Checked by:</strong>
+                </td>
+                
+                <td colspan="1" class="text-center">
+                    <strong>Delivery by:</strong>
+                </td>
+                <td colspan="3" class="text-center">
+                    <strong>Received by:</strong>
+                </td>
+            </tr>  
+            
+            <tr style="height:60px;"> 
+            </tr>  
+            
+            <tr>
+                <td colspan="1" class="text-center">
+                    <strong>(Warehouse Admin)</strong>
+                </td>
+                <td colspan="1" class="text-center">
+                    <strong>(Warehouse Spvr)</strong>
+                </td>
+                
+                <td colspan="1" class="text-center">
+                    <strong>(Driver)</strong>
+                </td>
+                <td colspan="3" class="text-center">
+                    <strong>(Sign with complete Name &amp; Company/Stampel)</strong>
+                </td>
+            </tr> 
+            
+            <tr style="height:20px;"> 
+            </tr>  
+            
+            <tr>
+                <td colspan="6">
+                    <span>
+                        Returns and Claims caused by any condition will not be accepted after this Delivery Order signed by customer.
+                    </span>
+                </td>
+            </tr>             
+            <tr>
+                <td colspan="6">
+                    <span>
+                        All returns must be pre-authorized.
+                    </span>
+                </td>
+            </tr>      
+            
+            <tr style="height:20px;"> 
+            </tr>              
+            
+            <!--<tr class="text-left">-->
+            <!--    <td colspan="4" width="60%">-->
+            <!--        <span>-->
+            <!--            Page: 1 -->
+            <!--        </span>-->
+            <!--    </td>-->
+            <!--    <td>-->
+            <!--        <strong>-->
+            <!--           Print Time-->
+            <!--        </strong>-->
+            <!--    </td>-->
+            <!--    <td>-->
+            <!--        <strong>-->
+            <!--         : <span t-esc="datetime.datetime.now().strftime('%B %d, %Y %H:%M:%S')"/>-->
+                     <!--: <span t-field="doc.create_date" t-options="{&quot;format&quot;: &quot;dd MMM yyyy&quot;}"/>  -->
+            <!--        </strong>-->
+            <!--    </td>-->
+            <!--</tr>          -->
+        </table>        
+    </div>
+    
+                            
+    <t t-set="company" t-value="doc.company_id"/> 
+           
+    <div t-attf-class="footer o_company_#{company.id}_layout {{report_type != 'pdf' and 'mt-auto'}}">
+        <div class="o_footer_content d-flex border-top pt-2">
+            <div class="flex-grow-1 text-start me-2">
+                <div t-if="report_type == 'pdf' and display_name_in_footer" t-out="o.name">(document name)</div>
+                <div t-if="report_type == 'pdf'" class="text-nowrap">Page <span class="page"/></div>                
+            </div>
+            <div class="text-end text-muted">
+                <!--<div t-if="report_type == 'pdf'" class="text-nowrap">Page <span class="page"/> / <span class="topage"/></div>-->
+                <span t-esc="datetime.datetime.now().strftime('%B %d, %Y %H:%M:%S')"/>
+            </div>
+        </div>
+    </div>
+                            
+</t>

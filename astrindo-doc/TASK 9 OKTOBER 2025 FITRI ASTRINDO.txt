@@ -1,0 +1,18 @@
+TASK 9 OKTOBER 2025 FITRI ASTRINDO.txt
+
+1. purchase order astrindo
+https://astrindo-staging-24397234.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_cdda994c-2880-4d0b-93fc-d64b6f2203fb/6?debug=1
+2. Quotation
+https://astrindo-staging-24397234.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_56fc57b4-78f1-4842-a36a-5801e6de10b2/9?debug=1
+3.Sales Order (SO) / Job Order
+https://astrindo-staging-24397234.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_9e7e09d6-4995-468f-bc5c-43fd7469c143/9?debug=1
+6. Invoice PSIP dengan QR Code
+https://astrindo-staging-24397234.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_7c567662-7f98-4094-9d46-4553d0fb1bfe/4?debug=1
+9.svo
+https://astrindo-staging-24397234.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_b8064ca7-0b25-4c25-9161-6f9ebaabcfb4/2
+10. svr
+https://astrindo-staging-24397234.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_4d21e375-2108-473f-b417-fe70b1d920b2/2
+
+11. DO dot matrix
+https://astrindo-staging-24397234.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_5b4af5f3-897b-43ce-91e0-d33cf88b500d/9?debug=1
+

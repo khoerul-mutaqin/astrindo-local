@@ -1,0 +1,24 @@
+TASK 2 Okt 2025
+
+1. https://www.falinwa.com/odoo/action-3136/4446/action-477/42254			== fal_activity_server_action
+2. https://www.falinwa.com/odoo/action-3136/4446/action-477/42253			== fal_activity_meeting	
+3. https://www.falinwa.com/odoo/action-3136/4446/action-477/42215			== cds_access_right_studio
+4. https://www.falinwa.com/odoo/action-3136/4409/action-477/43014			== agung
+
+create how to test
+fal_drawing_engine 		== OK
+fal_image_export_to_excel	== OK
+fal_delivery_report		== OK
+
+Agung Recuirement ticket 43014 base code at branch task_41354_inquiry_status_progress_dashboard
+
+Feedback Inquiry Non-Service
+1. Closed date > Dicatat ketika inquiry dilakukan proses submit
+2. Customer type untuk type inquiry selain "Marketing" dengn category "Quotation" readonly menajdi "Existing"
+3. Ketika Inquiry "Marketing" category "Quotation" customer type akan "New"
+4. Field Category dipindahkan pada posisi general information, dengan urutan berikut:
+- Source Inquiry
+- Type Inquiry
+- Category
+5. Button "Submit Inquiry" di hide ketika inquiry sudah di submit dan button "Closed" hide ketika sudah closed
+6. kondisi typr pool disamakan dengan type yang lain

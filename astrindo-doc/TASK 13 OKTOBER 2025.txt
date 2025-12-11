@@ -1,0 +1,64 @@
+TASK 13 OKTOBER 2025
+
+PARENCTIC TASK
+1. invoice draft
+2. copy notification_message line 64 => read_import_workflow line 474
+3. ganti chanel nama function procces
+4. sale draft dan pass
+5. invoice draft procces
+
+
+
+1. Order delivered = bisa
+2. Order qty = tidak bisa
+
+
+1. Purhase rder Test
+## purchase order astrindo
+
+https://astrindo-staging-24397234.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_cdda994c-2880-4d0b-93fc-d64b6f2203fb/3
+
+2. Sale Order Test = belum naik main
+## Sales Order (SO) / Job Order
+
+https://astrindo-staging-24397234.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_56fc57b4-78f1-4842-a36a-5801e6de10b2/6?debug=1
+
+3. Quotation Test = belum naik main
+## Quotation
+
+https://astrindo-staging-24397234.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_9e7e09d6-4995-468f-bc5c-43fd7469c143/6?debug=1
+
+6. Invoice Test
+## Invoice PSIP dengan QR Code
+
+https://astrindo-staging-24475740.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_bfddd9c8-522b-48f8-9b9b-8b1b5f8feef1/11
+
+quantity: sesuai quantity
+Record So : 6
+Record invoice :24
+
+test downlpayment
+https://astrindo-staging-24397234.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_7c567662-7f98-4094-9d46-4553d0fb1bfe/24?debug=1
+
+
+9.svo
+https://astrindo-staging-24397234.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_b8064ca7-0b25-4c25-9161-6f9ebaabcfb4/2
+10. svr
+
+https://astrindo-staging-24397234.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_4d21e375-2108-473f-b417-fe70b1d920b2/2
+
+11. DO dot matrix
+https://astrindo-staging-24397234.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_5b4af5f3-897b-43ce-91e0-d33cf88b500d/9?debug=1
+
+
+
+
+Agung
+
+1. Task
+
+upd:
+1. semua field read only helpdesk ketika sudah submit = oke
+2. kilometer bilangan bulat			      = oke
+3. Buat pop up sesuai nama button		      = belum
+4. Khusus button CLose Inquiry tambah  dengan reason  = belum 

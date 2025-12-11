@@ -1,0 +1,102 @@
+<t t-name="studio_report_document">
+    <div class="page">
+        Page : 1
+
+        <table class="table" width="100%" >
+            <tr class="text-center" >
+                <td class="text-center"  colspan="11">
+                    <strong>JOB ORDER</strong>
+                </td>
+            </tr>
+            <tr class="text-center" >
+                <td class="text-center"  colspan="11">
+                    <strong>No. OPN-25-07-16-015</strong>
+                </td>
+            </tr>
+        </table>
+
+        <table class="table" width="100%" >
+            <tr class="text-center" style="background-color:#a6aaaf">
+                <td colspan="11">
+                    <strong>Purchase Details</strong>
+                </td>
+            </tr>
+            <tr class="text-center" style="background-color:#a6aaaf">
+                <td>
+                    <strong>No</strong>
+                </td>
+                <td width="10%">
+                    <strong>Item Code</strong>
+                </td>
+                <td width="15%">
+                    <strong>Description</strong>
+                </td>
+                <td width="5%">
+                    <strong>Qty (A)</strong>
+                </td>
+                <td width="7%">
+                    <strong>Harga</strong>
+                </td>
+                <td width="10%">
+                    <strong>Stock On Hand (B)</strong>
+                </td>
+                <td width="10%">
+                    <strong>Goods On The Way (C)</strong>
+                </td>
+                <td width="13%">
+                    <strong>Run Rate Weekly (D)</strong>
+                </td>
+                <td width="10%">
+                    <strong>(A+B+C)/D Stock For Weeks</strong>
+                </td>
+                <td width="12%">
+                    <strong>Keterangan</strong>
+                </td>
+                <td width="10%">
+                    <strong>Rekomendasi Vendor</strong>
+                </td>
+            </tr>
+            <t t-set="line_number" t-value="0"/>
+<!--            <t t-foreach="o.product_line_ids" t-as="line">-->
+<!--                <tr>-->
+<!--                    &lt;!&ndash; Tampilkan nomor urut &ndash;&gt;-->
+<!--                    <t t-set="line_number" t-value="line_number + 1"/>-->
+<!--                    <td name="line_number" class="text-center">-->
+<!--                        <t t-esc="line_number"/>-->
+<!--                    </td>-->
+<!--                    <td>-->
+<!--                        <span t-field="line.product_id.default_code"/>-->
+<!--                    </td>-->
+<!--                    <td>-->
+<!--                        <span t-field="line.description"/>-->
+<!--                    </td>-->
+<!--                    <td class="text-center">-->
+<!--                        <span t-field="line.quantity"/>-->
+<!--                    </td>-->
+<!--                    <td style="text-align:right;">-->
+<!--                        <span t-field="line.x_studio_price"/>-->
+<!--                    </td>-->
+<!--                    <td style="text-align:right;">-->
+<!--                        <span t-field="line.x_studio_stock_on_hand"/>-->
+<!--                    </td>-->
+<!--                    <td style="text-align:right;">-->
+<!--                        <span t-field="line.x_studio_goods_on_the_way"/>-->
+<!--                    </td>-->
+<!--                    <td style="text-align:right;">-->
+<!--                        <span t-field="line.x_studio_run_rate_weekly"/>-->
+<!--                    </td>-->
+<!--                    <td style="text-align:right;">-->
+<!--                        <span t-field="line.x_studio_stocks_for_weeks"/>-->
+<!--                    </td>-->
+<!--                    <td>-->
+<!--                        <span t-field="line.x_studio_note"/>-->
+<!--                    </td>-->
+<!--                    <td>-->
+<!--                        <span t-field="line.seller_id"/>-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--            </t>-->
+        </table>
+
+    </div>
+</t>

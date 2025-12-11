@@ -1,0 +1,273 @@
+<t t-name="studio_report_document">
+ 
+    <t t-set="company" t-value="doc.company_id"/>  
+    <div t-attf-class="header o_company_#{company.id}_layout">
+            <div class="row">
+                <div class="col-6" name="company_logo">
+                    <ul class="list-unstyled" name="company_address_list">
+                        <li>
+                            <img t-if="company.logo" class="o_company_logo_big" t-att-src="image_data_uri(company.logo)" alt="Logo"/>
+                        </li>
+                    </ul>
+                    
+                </div>
+                <div class="col-6" name="company_address">
+                    <ul class="list-unstyled" name="company_address_list">
+                        <li>    
+                            <strong>
+                                PT ASTRINDO STARVISION
+                            </strong>
+                        </li>
+                        <li>
+                            <span t-field="company.company_details">
+                                <div class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 w-100 opacity-75 text-muted text-center">
+                                    <strong>Company details block</strong>
+                                    <div>Contains the company details.</div>
+                                </div>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+    </div>
+        
+    <div class="page">
+        <!--Section Header-->
+        <table class="table-borderless" width="100%">
+            <tr>
+                <td colspan="2" width="35%">
+                </td>
+                <td colspan="2" style="text-align:center; border-bottom: 2px solid black;" width="30%">
+                    <h2>
+                        <strong>KWITANSI</strong>
+                    </h2>
+                </td>
+                <td colspan="2" width="35%">
+                </td>
+            </tr>
+        </table>
+        <br/>
+        
+        <!--Section Kwitansi-->
+        <table class="table-borderless" width="100%">
+            <tr>
+                <td width="25%">
+                    No KWT
+                </td>
+                <td width="25%">
+                    : <span t-field="doc.name"/> 
+                </td>
+                <td width="25%">
+                    <span/>
+                </td>
+                <td width="25%">
+                </td>
+            </tr>    
+            <tr>
+                <td width="25%">
+                    Telah Terima Dari
+                </td>
+                <td width="25%">
+                    : <span t-field="doc.partner_id"/> 
+                </td>
+                <td width="25%">
+                </td>
+                <td width="25%">
+                </td>
+            </tr>    
+            <tr>
+                <td width="25%">
+                    Jumlah Uang
+                </td>
+                <td width="25%">
+                    : <span t-field="doc.amount"/>                     
+                </td>
+                <td width="25%">
+                </td>
+                <td width="25%">
+                </td>
+            </tr>    
+            <tr>
+                <td width="25%">
+                    Terbilang
+                </td>
+                <td colspan="3" width="75%">
+                    <t t-set="doc" t-value="doc.with_context(lang='id_ID')"/>
+                    : <span style="padding-left: 5px;" t-esc="doc.currency_id.amount_to_text(doc.amount)"/> 
+                </td>
+            </tr>
+        </table>        
+        <br/>
+        
+        
+        <table class="table-borderless" width="100%">       
+            <tr>
+                <td width="25%">
+                    Uang Pembayaran
+                </td>
+                <td width="25%">
+                   : Atas Transaksi Dibawah Ini
+                </td>
+                <td width="25%">
+                </td>
+                <td width="25%">
+                </td>
+            </tr> 
+        </table>
+        <br/>   
+        
+        <!--Section Pembayaran dianggap lunas-->            
+        <table class="table-borderless" width="100%">
+            <tr>
+                <td width="25%">
+                </td>
+                <td width="25%" style="border: 1px solid black; text-align:center;">
+                    INVOICE NO
+                </td>
+                <td width="25%" style="border: 1px solid black; text-align:center;">
+                    TGL
+                </td>
+                <td width="25%" style="border: 1px solid black; text-align:center;">
+                    Amount (IDR)
+                </td>
+            </tr>
+            <tr>
+                <td width="25%" style="padding-bottom:100px;">
+                </td>
+                <td width="25%" style="border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; padding-bottom:100px; text-align:center;">
+                    <!--PSIP-23-2-32–2-2-->
+                    <span t-field="doc.invoice_ids.name"/>                     
+                    
+                    
+                </td>
+                <td width="25%" style="border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; padding-bottom:100px; text-align:center;">
+                    <span t-field="doc.invoice_ids.invoice_date" t-options="{&quot;format&quot;: &quot;dd MMM yyyy&quot;}"/>  
+                                        
+                </td>
+                <td width="25%" style="border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; padding-bottom:100px; text-align:center;">
+                    <span t-field="doc.amount"/>  
+                </td>
+            </tr>
+            <tr>
+                <td width="25%">
+                </td>
+                <td width="25%" style="text-align:center;  border-left: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black;">
+                </td>
+
+                <!--<span>Materai</span>   -->
+                <!--check is materai gunakan if any di xml report-->
+                <!--id materai-->
+                <t t-set="is_have_materai" t-value="any(line.product_id.id == 44 for line in doc.invoice_ids.invoice_line_ids)"/>
+                <t t-set="materai" t-value="env['product.product'].search([('id', '=', 44)], limit=1)"/>
+                
+                <td width="25%" style="text-align:center;  border-left: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black;">
+                    <t t-if="is_have_materai">
+                        <!--MATERAI-->
+                        <span t-field="materai.name"/>                    
+                    </t>
+                    <t t-else="">
+                        <span></span>
+                    </t>
+                </td>
+                <td width="25%" style="text-align:center;  border-left: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black;">
+                    <t t-if="is_have_materai">
+                        Rp. <span t-field="materai.lst_price"/>                      
+                    </t>
+                    <t t-else="">
+                        <span>-</span>
+                    </t>                    
+                    
+                </td>
+            </tr>
+            <tr>
+                <td width="25%">
+                </td>
+                
+                <td colspan="2" width="50%" style=" border-left: 1px solid black; border-bottom: 1px solid black; border-top: 1px solid black;">
+                </td>
+                <td width="25%" style="text-align:center;  border-right: 1px solid black; border-bottom: 1px solid black; border-top: 1px solid black;">
+                    <span t-field="doc.amount"/>  
+                </td>
+            </tr>            
+        </table>        
+        <br/>
+        
+        <!--Section Pembayaran dianggap lunas-->           
+        <table class="table-borderless" width="100%">       
+            <tr>
+                <td colspan="4">
+                    Catatan:
+                </td>
+            </tr>
+            
+            <tr>
+                <td colspan="4">
+                    <strong>
+                        Pembayaran dianggap lunas setelah pembayaran diterima, dalam bentuk uang tunai atau transfer
+                    </strong>
+                </td>
+            </tr>
+            
+            <tr>
+                <td colspan="4">
+                    <strong>
+                        
+                    </strong>
+                    sedangkan untuk cek/giro pemayaran dianggap lunas apabila telah dicairkan ke dalam rek. Perusahaan
+                </td>
+            </tr>
+            
+        </table>        
+        <br/>
+        <br/>
+        
+        <!--Section Jakarta dan tanggal-->        
+        <table class="table-borderless" width="100%">       
+            <tr>
+                <td colspan="4">
+                    Jakarta, <span t-field="doc.date" t-options="{&quot;format&quot;: &quot;dd MMM yyyy&quot;}"/>   
+                </td>
+            </tr>
+        </table>        
+        <br/>
+        <br/>
+        <table class="table-borderless" width="100%">       
+            <tr>
+                <td colspan="4">
+                    (Materai, 10000)
+                </td>
+            </tr>
+        </table>        
+        <br/>
+        <br/>
+        
+        <!--Section Footer-->
+        <table class="table-borderless" width="100%">
+            <tr>
+                <td colspan="2" style="text-align:left; border-bottom: 2px solid black;" width="30%">
+                    <strong>Serly</strong>
+                </td>
+                <td colspan="2" width="35%">
+                </td>
+                <td colspan="2" width="35%">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:left;" width="30%">
+                    Bagian Keuangan
+                </td>
+                <td colspan="2">
+                </td>
+                <td colspan="2">
+                </td>
+            </tr>
+        </table>
+        
+        
+        <br/>
+        <br/>
+        
+        
+        
+    </div>
+</t>

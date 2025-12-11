@@ -1,0 +1,116 @@
+TASK 22 September 2025
+ 
+1. Appropal report: [FAL] purchase request == Sudah Staging
+   Appropal report: [FAL] purchase request == Sudah Main
+
+REVISI
+- Quantity bulat	: contoh : 2
+- Format tanggal	: 18 Sept 2025 16:20:11
+- Status 		: Aprrove atau tidak
+- Tabel Qty sama Nomor Center, Selain Itu kiri
+- Deskripsi kebawah
+
+Link
+https://www.falinwa.com/odoo/project.task/38020
+
+Test:
+https://falinwasales-astrindo-staging-23710675.dev.odoo.com/report/pdf/approvals.report_approval_request_copy_1/1
+
+Test Issue Description:
+https://falinwasales-astrindo-staging-23710675.dev.odoo.com/report/pdf/approvals.report_approval_request_copy_1/14
+
+Catatan:
+Header Seperti Purchase
+
+
+2. Sale Order Report:  Print Out Sales Order (SO) / Job Order  	=== Sudah Staging
+   Sale Order Report:  Print Out Sales Order (SO) / Job Order   === Sudah Main
+
+REVISI
+- Header di samain PO	:
+- Quantity bulat	: contoh : 2
+- Kasih jarak samping 	: seperti purchase
+- Tabel Qty sama Nomor Center, Selain Itu kiri
+- tanggal sesua ods ada jam : 18 Sept 2025 16:20:11 :
+
+Link
+https://www.falinwa.com/odoo/project.task/38264
+
+TEST
+https://falinwasales-astrindo-staging-23710675.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_43d20711-fb83-4e03-9115-529f80cde82e/7
+
+Catatan:
+Header Seperti Purchase
+
+
+3. INVOICE REPORT : Print Out Invoice PSIP dengan QR Code === Sudah Staging
+   INVOICE REPORT : Print Out Invoice PSIP dengan QR Code === Sudah Main
+
+Link
+https://www.falinwa.com/odoo/project.task/38265
+
+- Qty Rounded
+- Tabel Product sama Description Itu kiri
+- tanggal sesua ods ada jam : 18 Sept 2025 16:20:11 :
+
+
+TEST:
+https://falinwasales-astrindo-staging-23710675.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_90f77efa-d105-457f-ba8f-c3666361310d/14
+
+Catatan:
+Header Custom
+
+4. REPAIR Report : Print out Service Order (SVO) – Tanda Terima Service === SUDAH OKE GAK ADA REVISI
+   REPAIR Report : Print out Service Order (SVO) – Tanda Terima Service	=== Sudah Main 
+   [BP] Print Out SVO - Tanda terima service
+
+Link
+https://www.falinwa.com/odoo/project.task/38259
+
+TEST
+https://falinwasales-astrindo-staging-23710675.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_216231c4-fca6-4cf9-9ea9-35ecd0a5e890/1
+
+Catatan:
+Header Custom
+
+
+5.  Stock Picking Report: Print out DO dot matrix 		== Sudah Staging
+    Stock Picking Report: Print out DO dot matrix 		== Sudah Main
+    [BP] Print out DO dot matrix (DO dan internal transfer)
+
+Link
+https://www.falinwa.com/odoo/project.task/38034
+- Qty Rounded
+- - tanggal sesua ods ada jam : 18 Sept 2025 16:20:11 :
+
+TEST:
+https://falinwasales-astrindo-staging-23710675.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_0da8e5bc-1957-42f0-8870-e70353c027b3/20
+
+Catatan:
+Header Custom
+
+
+6. Print out Kwitansi Non Materai				== Sudah Staging OKE GAK ADA REVISI
+   Print out Kwitansi Non Materai				== Sudah Main
+
+Link
+https://www.falinwa.com/odoo/project.task/38260
+
+TEST:
+https://falinwasales-astrindo-staging-23710675.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_cfebbd21-772b-4de5-8ba9-70f46155368d/2
+
+Catatan:
+Header Seperti Purchase - beda dikit
+
+
+7. Print out Kwitansi Materai  == Sudah Staging
+   Print out Kwitansi Materai  == Sudah Main
+
+Link
+https://www.falinwa.com/odoo/project.task/38262?menu_id=177
+
+TEST:
+https://falinwasales-astrindo-staging-23710675.dev.odoo.com/report/pdf/studio_customization.studio_report_docume_27161172-fbd4-4b14-876b-1a05286353cf/8
+
+Catatan:
+Header Seperti Purchase - beda dikit

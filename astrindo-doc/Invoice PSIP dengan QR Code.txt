@@ -1,0 +1,335 @@
+<t t-name="studio_report_document">
+    <t t-call="web.external_layout">
+        <br/>
+        <!--Section Bill To-->
+        <table class="table-borderless o_ignore_layout_styling" width="100%">
+            <tr class="text-left">
+                <td colspan="3" width="50%">
+                    <strong>
+                        <span style="font-size:36px;">INVOICE</span>
+                    </strong>
+                </td>
+                <td colspan="3">
+                    <span/>
+                </td>
+            </tr>
+            <tr class="text-left" width="10%">
+                <td colspan="1">
+                    <span>
+                        <strong>NO</strong>
+                    </span>
+                </td>
+                <td colspan="2" width="40%">
+                                    :                    <span t-field="doc.name"/>
+                </td>
+                <td colspan="3">
+                </td>
+            </tr>
+
+            <tr class="text-left">
+                <td colspan="3" width="50%">
+                    <span>Bill To :</span>
+                </td>
+                <td colspan="1">
+                    <span>Invoice Date</span>
+                </td>
+                <td colspan="2">
+                                     :                    <span t-field="doc.invoice_date" t-options="{&quot;format&quot;: &quot;dd MMM yyyy&quot;}"/>
+                </td>
+            </tr>
+
+            <tr class="text-left">
+                <td colspan="3">
+                    <span t-field="doc.partner_id"/>
+                </td>
+                <td colspan="1">
+                    <span>SO No. </span>
+                </td>
+                <td colspan="2">
+                                     :                    <span t-field="doc.invoice_origin"/>
+                </td>
+            </tr>
+
+            <tr class="text-left">
+                <td colspan="3" style="text-align:left">
+                                     Phone : <span t-field="doc.partner_shipping_id.phone"/>
+                </td>
+                <td colspan="1">
+                    <span>DO No. </span>
+                </td>
+                <td colspan="2">
+                    <t t-if="doc.line_ids.sale_line_ids.order_id.delivery_count">
+                        <t t-set="sale" t-value="doc.line_ids.sale_line_ids.order_id"/>
+                        <t t-set="transfer" t-value="env['stock.picking'].search([('origin', '=', sale.name )], limit=1)"/>
+                    
+                                        :                        <span t-esc="transfer.name"/>
+                    </t>
+                    <t t-else="">
+                                        :                        <span>-</span>
+                    </t>
+
+                </td>
+            </tr>
+            <tr class="text-left">
+                <td colspan="3">
+                    <t t-if="doc.partner_shipping_id">
+                        <span t-field="doc.partner_shipping_id"/>
+                        <br/>
+                    </t>
+                    <t t-if="doc.partner_shipping_id.street">
+                        <span t-field="doc.partner_shipping_id.street"/>
+                        <br/>
+                    </t>
+                    <t t-if="doc.partner_shipping_id.street2">
+                        <span t-field="doc.partner_shipping_id.street2"/>
+                        <br/>
+                    </t>
+                    <t t-if="doc.partner_shipping_id.city">
+                        <span t-field="doc.partner_shipping_id.city"/>
+                    </t>
+                    <t t-if="doc.partner_shipping_id.zip">
+                        <span t-field="doc.partner_shipping_id.zip"/>
+                        <br/>
+                    </t>
+                    <t t-if="doc.partner_shipping_id.country_id">
+                        <span t-field="doc.partner_shipping_id.country_id"/>
+                        <br/>
+                    </t>
+                    <t t-if="doc.partner_shipping_id.vat">
+                                        NPWP : <span t-field="doc.partner_shipping_id.vat"/>
+                    </t>
+                </td>
+                <td colspan="1">
+                    <span>Term of pay </span>
+                    <br/>
+                    <span>Due Date </span>
+                </td>
+                <td colspan="2">
+                                     :                    <span t-field="doc.invoice_payment_term_id"/>
+                    <br/>
+                                     :                    <span t-field="doc.invoice_date_due" t-options="{&quot;format&quot;: &quot;dd MMM yyyy &quot;}"/>
+                </td>
+            </tr>
+        </table>
+        <br/>
+
+        <!--Section Product-->
+
+        <table class="table o_table" width="100%">
+            <!--<table class="table" width="100%">-->
+            <tr class="text-left">
+                <td style="padding:5px; text-align:center" width="5%">
+                    <span>No.</span>
+                </td>
+                <td style="padding:5px;" width="15%">
+                    <span>Product Number</span>
+                </td>
+                <td style="padding:5px;" width="35%">
+                    <span>Description</span>
+                </td>
+                <td style="padding:5px; text-align:center" width="15%">
+                    <span>Qty</span>
+                </td>
+                <td style="padding:5px;" width="15%">
+                    <span>Unit Price</span>
+                </td>
+                <td style="padding:5px;" width="15%">
+                    <span>Total Price</span>
+                </td>
+            </tr>
+
+            <t t-set="line_number" t-value="0"/>
+            <t t-set="fal_total_discount" t-value="0"/>
+            <t t-set="fal_sub_total" t-value="0"/>
+            <t t-set="fal_tax_total" t-value="0"/>
+            <t t-foreach="doc.invoice_line_ids" t-as="line">
+                <t t-if="line.product_id.name not in ['Materai','Discount']">
+                    <tr class="text-left">
+                        <!-- Tampilkan nomor urut -->
+                        <t t-set="line_number" t-value="line_number + 1"/>
+                        <t t-set="fal_total_discount" t-value="fal_total_discount + line.discount"/>
+                        <td style="padding:5px; text-align:center">
+                            <t t-esc="line_number"/>
+                        </td>
+                        <td style="padding:5px;">
+                            <span t-field="line.product_id.default_code"/>
+                        </td>
+                        <td style="padding:5px; ">
+                            <t t-if="line.is_downpayment">
+                                <span t-field="line.name"/>
+                            </t>
+                            <t t-if="not line.is_downpayment">
+                                <span t-field="line.product_id.name"/>
+                            </t>
+                        </td>
+                        <td style="padding:5px; text-align:center">
+                            <span t-field="line.quantity" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 0}"/>
+                        </td>
+                        <td style="padding:5px;">
+                            <span t-field="line.price_unit"/>
+                        </td>
+                        <t t-set="fal_sub_total" t-value="fal_sub_total + line.price_subtotal"/>
+                        <td style="padding:5px;">
+                            <!--<span t-esc="line.price_subtotal" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>                        -->
+                            <span t-esc="line.price_unit * line.quantity" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                        </td>
+                    </tr>
+                </t>
+            </t>
+
+            <tr>
+                <t t-set="is_materai" t-value="0"/>
+                <t t-if="doc.invoice_line_ids.filtered(lambda l: l.product_id.name == 'Materai')">
+                    <t t-set="is_materai" t-value="1"/>
+                    <t t-set="materai" t-value="doc.invoice_line_ids.filtered(lambda l: l.product_id.name == 'Materai')"/>
+                </t>
+                <t t-set="is_discount" t-value="0"/>
+                <t t-if="doc.invoice_line_ids.filtered(lambda l: l.product_id.name == 'Discount')">
+                    <t t-set="is_discount" t-value="1"/>
+                    <t t-set="discount_value" t-value="doc.invoice_line_ids.filtered(lambda l: l.product_id.name == 'Discount')"/>
+                </t>
+            </tr>
+        </table>
+        <!--Section Remaks-->
+        <div class="row">
+            <!-- Kolom kiri -->
+            <div class="col-6 o_ignore_layout_styling" style="padding-right: 15px;">
+                <strong>*Remaks :</strong>
+                <br/>
+                <span t-field="doc.narration"/>
+            </div>
+
+            <!-- Kolom kanan -->
+            <!-- Tambahkan deteksi untuk Discount dan Materai -->
+            <t t-set="is_materai" t-value="False"/>
+            <t t-if="doc.invoice_line_ids.filtered(lambda l: l.product_id.name == 'Materai')">
+                <t t-set="is_materai" t-value="True"/>
+                <t t-set="materai_line" t-value="doc.invoice_line_ids.filtered(lambda l: l.product_id.name == 'Materai')[0]"/>
+            </t>
+
+            <t t-set="is_discount" t-value="False"/>
+            <t t-if="doc.invoice_line_ids.filtered(lambda l: l.product_id.name == 'Discount')">
+                <t t-set="is_discount" t-value="True"/>
+                <t t-set="discount_line" t-value="doc.invoice_line_ids.filtered(lambda l: l.product_id.name == 'Discount')[0]"/>
+            </t>
+            <div class="col o_ignore_layout_styling" style="margin-top:10px;">
+                <table class="table-borderless o_ignore_layout_styling" style="width:100%;">
+                    <tr>
+                        <td style="padding:3px; width:50%;">SubTotal</td>
+                        <td style="padding:3px; width:5%; text-align:left;">:</td>
+                        <td style="padding:3px; text-align:right;">
+                            <span t-esc="'{:,.2f}'.format(fal_sub_total)"/>
+                        </td>
+                    </tr>
+                    <tr t-if="is_discount">
+                        <td style="padding:3px;">Discount</td>
+                        <td style="padding:3px; text-align:left;">:</td>
+                        <td style="padding:3px; text-align:right;">
+                            <span t-esc="'{:,.2f}'.format(abs(discount_line.price_total))"/>
+                        </td>
+                    </tr>
+
+                    <tr t-if="is_materai">
+                        <td style="padding:3px;">Materai</td>
+                        <td style="padding:3px; text-align:left;">:</td>
+                        <td style="padding:3px; text-align:right;">
+                            <span t-esc="'{:,.2f}'.format(materai_line.price_total)"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px;">VAT</td>
+                        <td style="padding:3px; text-align:left;">:</td>
+                        <td style="padding:3px; text-align:right;">
+                            <span t-esc="'{:,.2f}'.format(doc.amount_tax)"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:3px; font-weight:bold; border-top:1px solid black; border-bottom:1px solid black;">
+                                                Total
+                        </td>
+                        <td style="padding:3px; font-weight:bold; border-top:1px solid black; border-bottom:1px solid black; text-align:left;">:</td>
+                        <td style="padding:3px; font-weight:bold; border-top:1px solid black; border-bottom:1px solid black; text-align:right;">
+                            <span t-esc="doc.currency_id.name"/>
+                            <span t-esc="'{:,.2f}'.format(doc.amount_total)"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <br/>
+        <br/>
+
+        <!--Section remaks -->
+        <table class="table-borderless o_ignore_layout_styling" width="100%">
+            <tr>
+                <td width="20%">
+                    <span/>
+                </td>
+                <td width="20%">
+                    <span/>
+                </td>
+                <td width="20%">
+                    <span/>
+                </td>
+                <td colspan="3">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <strong>IN WORD :</strong>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <t t-set="doc" t-value="doc.with_context(lang='id_ID')"/>
+                    <span style="padding-left: 5px;" t-esc="doc.currency_id.amount_to_text(doc.amount_total)"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <span>Jakarta, </span>
+                    <span t-field="doc.invoice_date" t-options="{&quot;format&quot;: &quot;dd MMM yyyy&quot;}"/>
+                </td>
+            </tr>
+            <!--<tr style="height:5px;"> -->
+            <!--</tr>            -->
+            <tr>
+                <td colspan="6">
+                    <img t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s' %('QR', doc.x_studio_qr_link, 100, 100)"/>
+                </td>
+            </tr>
+        </table>
+
+        <!--Section Under Qr Code-->
+        <table class="table-borderless o_ignore_layout_styling" width="100%">
+
+            <tr colspan="6" style="height:10px;">
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:center; border-bottom: 2px solid black;" width="30%">
+                </td>
+                <td colspan="2" width="35%">
+                </td>
+                <td colspan="2" width="35%">
+                </td>
+            </tr>
+            <tr colspan="6" style="height:10px;">
+            </tr>
+            <tr>
+                <td>
+                    <span>PT Astrinfo Starvision</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <strong>
+                        <i>
+                            This is computer generated document
+                        </i>
+                    </strong>
+                </td>
+            </tr>
+        </table>
+
+    </t>
+</t>
