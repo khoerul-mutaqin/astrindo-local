@@ -1,0 +1,9 @@
+  <xpath expr="//button[@name='354']" position="attributes">
+        <attribute name="groups">
+            base.group_system, 
+            account.group_account_invoice, 
+            account.group_account_readonly, 
+            account.group_account_user, 
+            account.group_account_manager
+        </attribute>
+  </xpath>
